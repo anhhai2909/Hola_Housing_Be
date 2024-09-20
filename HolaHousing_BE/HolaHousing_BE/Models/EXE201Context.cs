@@ -30,6 +30,7 @@ namespace HolaHousing_BE.Models
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             optionsBuilder.UseSqlServer(config.GetConnectionString("MyCnn"));
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -97,7 +98,7 @@ namespace HolaHousing_BE.Models
             modelBuilder.Entity<PostType>(entity =>
             {
                 entity.HasKey(e => e.TypeId)
-                    .HasName("PK__Post_Typ__FE90DDFEB9B3F112");
+                    .HasName("PK__Post_Typ__FE90DDFE9105F90F");
 
                 entity.ToTable("Post_Type");
 
@@ -167,8 +168,8 @@ namespace HolaHousing_BE.Models
 
             modelBuilder.Entity<PropertyImage>(entity =>
             {
-                entity.HasKey(e => e.PropertyId)
-                    .HasName("PK__Property__2757E6F65017F84F");
+                entity.HasKey(e => new { e.PropertyId, e.Image })
+                    .HasName("PK__Property__747EA80B4348C114");
 
                 entity.ToTable("Property_Image");
 
@@ -179,8 +180,8 @@ namespace HolaHousing_BE.Models
                 entity.Property(e => e.Image).HasMaxLength(200);
 
                 entity.HasOne(d => d.Property)
-                    .WithOne(p => p.PropertyImage)
-                    .HasForeignKey<PropertyImage>(d => d.PropertyId)
+                    .WithMany(p => p.PropertyImages)
+                    .HasForeignKey(d => d.PropertyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Property___Prope__31EC6D26");
             });
@@ -214,7 +215,7 @@ namespace HolaHousing_BE.Models
                         r => r.HasOne<Tag>().WithMany().HasForeignKey("TagId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__New_Tag__Tag_ID__3C69FB99"),
                         j =>
                         {
-                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD6BC05B8AA");
+                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD60CBF388D");
 
                             j.ToTable("New_Tag");
 

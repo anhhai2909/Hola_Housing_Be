@@ -5,6 +5,11 @@ namespace HolaHousing_BE.Models
 {
     public partial class Property
     {
+        public Property()
+        {
+            PropertyImages = new HashSet<PropertyImage>();
+        }
+
         public int PropertyId { get; set; }
         public string? Content { get; set; }
         public string? Description { get; set; }
@@ -28,6 +33,6 @@ namespace HolaHousing_BE.Models
 
         public virtual PostPrice? PostPrice { get; set; }
         public virtual User? Poster { get; set; }
-        public virtual PropertyImage? PropertyImage { get; set; }
+        public virtual ICollection<PropertyImage> PropertyImages { get; set; }
     }
 }
