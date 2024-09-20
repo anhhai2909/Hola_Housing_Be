@@ -9,7 +9,10 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
         public MappingProfiles()
         {
             CreateMap<Property, PropertyDTO>();
+            CreateMap<PropertyImage, PropertyImageDTO>();
+            CreateMap<PostPrice, PostPriceDTO>();
+            CreateMap<PostType, PostTypeDTO>();
+            CreateMap<User, UserDTO>();
         }
-
     }
 }

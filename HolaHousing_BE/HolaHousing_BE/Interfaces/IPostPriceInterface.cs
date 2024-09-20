@@ -6,5 +6,6 @@ namespace HolaHousing_BE.Interfaces
     {
         ICollection<PostPrice> GetPostPrices();
         PostPrice GetPostPrice(int id);
+        bool IsExisted(int id);
     }
 }

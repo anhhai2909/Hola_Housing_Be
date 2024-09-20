@@ -39,5 +39,6 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Properties.FirstOrDefault(p => p.PropertyId == id) != null;
         }
+
     }
 }

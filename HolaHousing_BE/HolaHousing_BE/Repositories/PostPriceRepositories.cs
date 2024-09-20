@@ -5,14 +5,24 @@ namespace HolaHousing_BE.Repositories
 {
     public class PostPriceRepositories : IPostPriceInterface
     {
+        private readonly EXE201Context _context;
+        public PostPriceRepositories(EXE201Context context)
+        {
+            _context = context;
+        }
         public PostPrice GetPostPrice(int id)
         {
-            throw new NotImplementedException();
+            return _context.PostPrices.FirstOrDefault(p => p.PostPriceId == id);
         }
 
         public ICollection<PostPrice> GetPostPrices()
         {
-            throw new NotImplementedException();
+            return _context.PostPrices.ToList();
+        }
+
+        public bool IsExisted(int id)
+        {
+            return _context.PostPrices.FirstOrDefault(p => p.PostPriceId == id) != null ? true : false;
         }
     }
 }
