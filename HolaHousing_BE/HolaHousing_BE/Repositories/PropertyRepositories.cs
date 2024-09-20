@@ -18,10 +18,15 @@ namespace HolaHousing_BE.Repositories
 
         public Property GetPropertyByID(int id)
         {
-            return _context.Properties.Include(p => p.PropertyImages)
-                .Include(p=>p.Poster)
-                .Include(p=>p.PostPrice)
-                .FirstOrDefault(p => p.PropertyId == id);
+            if (IsExisted(id))
+            {
+                return _context.Properties.FirstOrDefault(p => p.PropertyId == id);
+            }
+            else
+            {
+                return null;
+            }
+            
         }
         public string GetFirstImage(int id)
         {

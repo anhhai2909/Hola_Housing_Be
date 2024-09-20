@@ -5,6 +5,7 @@ using HolaHousing_BE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
+using System.Collections.Generic;
 
 namespace HolaHousing_BE.Controllers
 {
@@ -35,6 +36,21 @@ namespace HolaHousing_BE.Controllers
             else
             {
                 return Ok(properties);
+            }
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetPropertiyByID(int id) { 
+            var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
+            if(property == null)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                return Ok(property);
             }
         }
     }
