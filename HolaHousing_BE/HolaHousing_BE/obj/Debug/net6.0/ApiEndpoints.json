@@ -58,9 +58,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HolaHousing_BE.Controllers.PostPriceController",
-    "Method": "GetPostPrices",
-    "RelativePath": "api/PostPrice",
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "GetPartContents",
+    "RelativePath": "api/PartContents",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -68,9 +68,51 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HolaHousing_BE.Controllers.PostPriceController",
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "GetPartContent",
+    "RelativePath": "api/PartContents/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "GetPartContentsByNewId",
+    "RelativePath": "api/PartContents/GetPartContentsByNewId/{newId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PostPricesController",
+    "Method": "GetPostPrices",
+    "RelativePath": "api/PostPrices",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PostPricesController",
     "Method": "GetPostPriceByID",
-    "RelativePath": "api/PostPrice/{id}",
+    "RelativePath": "api/PostPrices/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

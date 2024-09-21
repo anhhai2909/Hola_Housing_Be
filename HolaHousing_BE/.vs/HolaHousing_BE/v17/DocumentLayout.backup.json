@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\controllers\\partcontentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\partcontentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\controllers\\postpricescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\postpricescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\repositories\\newrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\repositories\\newrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\interfaces\\inewinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\interfaces\\inewinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\repositories\\tagrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\repositories\\tagrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\interfaces\\itaginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\interfaces\\itaginterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\automapper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\automapper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +22,45 @@
       "DocumentGroups": [
         {
           "DockedHeight": 284,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TagsController.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\TagsController.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\TagsController.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\TagsController.cs*",
-              "RelativeToolTip": "HolaHousing_BE\\Controllers\\TagsController.cs*",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwCUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T11:18:21.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "INewInterface.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\INewInterface.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Interfaces\\INewInterface.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\INewInterface.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Interfaces\\INewInterface.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T10:53:46.385Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "NewsController.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\NewsController.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\NewsController.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\NewsController.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Controllers\\NewsController.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAmwG4AAAAPAAAAAAAAAA==",
+              "Title": "PostPricesController.cs",
+              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PostPricesController.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\PostPricesController.cs",
+              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PostPricesController.cs",
+              "RelativeToolTip": "HolaHousing_BE\\Controllers\\PostPricesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T09:39:21.853Z",
+              "WhenOpened": "2024-09-21T14:59:21.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PartContentsController.cs",
+              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PartContentsController.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\PartContentsController.cs",
+              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PartContentsController.cs*",
+              "RelativeToolTip": "HolaHousing_BE\\Controllers\\PartContentsController.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAswCEAAACAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T14:54:49.462Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "NewRepositories.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\NewRepositories.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Repositories\\NewRepositories.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\NewRepositories.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Repositories\\NewRepositories.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAAJAAAAAAAAAA==",
+              "Title": "MappingProfiles.cs",
+              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
+              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
+              "RelativeToolTip": "HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T09:34:47.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TagRepositories.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\TagRepositories.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Repositories\\TagRepositories.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\TagRepositories.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Repositories\\TagRepositories.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAxwBMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T09:32:24.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ITagInterface.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\ITagInterface.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Interfaces\\ITagInterface.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\ITagInterface.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Interfaces\\ITagInterface.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T09:31:53.792Z",
+              "WhenOpened": "2024-09-21T14:54:13.785Z",
               "EditorCaption": ""
             }
           ]

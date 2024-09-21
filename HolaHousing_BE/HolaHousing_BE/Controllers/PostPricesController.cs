@@ -8,11 +8,11 @@ namespace HolaHousing_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostPriceController : ControllerBase
+    public class PostPricesController : ControllerBase
     {
         private readonly IPostPriceInterface _postPriceInterface;
         private readonly IMapper _mapper;
-        public PostPriceController(IPostPriceInterface postPriceInterface,IMapper mapper)
+        public PostPricesController(IPostPriceInterface postPriceInterface,IMapper mapper)
         {
             _mapper = mapper;
             _postPriceInterface = postPriceInterface;
