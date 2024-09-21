@@ -17,6 +17,8 @@ builder.Services.AddScoped<IPropertyInterface, PropertyRepositories>();
 builder.Services.AddScoped<IPropertyImageInterface, PropertyImageRepositories>();
 builder.Services.AddScoped<IPostPriceInterface, PostPriceRepositories>();
 builder.Services.AddScoped<IUserInterface, UserRepositories>();
+builder.Services.AddScoped<INewInterface, NewRepositories>();
+builder.Services.AddScoped<ITagInterface, TagRepositories>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 

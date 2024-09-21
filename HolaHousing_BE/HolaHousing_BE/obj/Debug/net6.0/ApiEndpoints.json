@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "GetNews",
+    "RelativePath": "api/News",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "GetNew",
+    "RelativePath": "api/News/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.PostPriceController",
     "Method": "GetPostPrices",
     "RelativePath": "api/PostPrice",
@@ -55,6 +81,32 @@
     "ContainingType": "HolaHousing_BE.Controllers.PropertyImagesController",
     "Method": "GetPropertyImagesByProID",
     "RelativePath": "api/PropertyImages/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "GetTags",
+    "RelativePath": "api/Tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "GetTag",
+    "RelativePath": "api/Tags/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

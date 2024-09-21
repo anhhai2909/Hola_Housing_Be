@@ -24,14 +24,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return NotFound();
             }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                return Ok(list);
-            }
+            return ModelState.IsValid ? Ok(list) : BadRequest(ModelState);
         }
     }
 }

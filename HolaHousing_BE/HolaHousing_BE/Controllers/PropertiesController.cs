@@ -29,14 +29,7 @@ namespace HolaHousing_BE.Controllers
                     p.Image = _propertyInterface.GetFirstImage(p.PropertyId);
                 }
             }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                return Ok(properties);
-            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
         public IActionResult GetPropertiyByID(int id) { 
@@ -45,13 +38,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return NotFound();
             }
-            if (!ModelState.IsValid) {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                return Ok(property);
-            }
+            return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
         }
     }
 }

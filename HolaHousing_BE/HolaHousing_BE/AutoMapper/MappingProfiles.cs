@@ -13,6 +13,8 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
             CreateMap<PostPrice, PostPriceDTO>();
             CreateMap<PostType, PostTypeDTO>();
             CreateMap<User, UserDTO>();
+            CreateMap<New, NewDTO>();
+            CreateMap<Tag, TagDTO>();
         }
     }
 }
