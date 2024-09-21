@@ -15,6 +15,7 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
             CreateMap<User, UserDTO>();
             CreateMap<New, NewDTO>();
             CreateMap<Tag, TagDTO>();
+            CreateMap<RelatedNew, RelatedNewDTO>();
         }
     }
 }

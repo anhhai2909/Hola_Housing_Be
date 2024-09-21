@@ -18,7 +18,15 @@ namespace HolaHousing_BE.Repositories
 
         public ICollection<New> GetNews()
         {
-            return _context.News.ToList();
+            return _context.News.Include(n=>n.Tags).ToList();
+        }
+
+        public List<New> GetRandomNews(int id, int n)
+        {
+            return _context.News.Where(n => n.NewId != id)
+                                .OrderBy(n => Guid.NewGuid())
+                                .Take(n)
+                                .ToList();
         }
 
         public ICollection<Tag> GetTagsByNewId(int id)

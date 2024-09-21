@@ -8,5 +8,7 @@ namespace HolaHousing_BE.Interfaces
         New GetNew(int id);
         bool IsExisted(int id);
         ICollection<Tag> GetTagsByNewId(int id);
+        //n la so New muon random
+        List<New> GetRandomNews(int id,int n);
     }
 }

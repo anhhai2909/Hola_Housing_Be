@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "GetRelatedNews",
+    "RelativePath": "api/News/GetRelatedNews/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
     "Method": "GetTagsByNewId",
     "RelativePath": "api/News/GetTagsByNewId/{newId}",
     "HttpMethod": "GET",
@@ -123,6 +139,22 @@
     "ContainingType": "HolaHousing_BE.Controllers.TagsController",
     "Method": "GetTag",
     "RelativePath": "api/Tags/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "GetNewsByTagId",
+    "RelativePath": "api/Tags/GetNewsByTagId/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
