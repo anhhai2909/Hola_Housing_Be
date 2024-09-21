@@ -28,5 +28,11 @@ namespace HolaHousing_BE.Controllers
             var item = _mapper.Map<List<PostPriceDTO>>(_postPriceInterface.GetPostPrices());
             return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
         }
+
+        [HttpGet("GetPostPriceByTypeId/{typeId}")]
+        public IActionResult GetPostPriceByTypeId(int typeId) {
+            var item = _mapper.Map<List<PostPriceDTO>>(_postPriceInterface.GetPostPricesByTypeId(typeId));
+            return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
+        }
     }
 }

@@ -126,6 +126,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.PostPricesController",
+    "Method": "GetPostPriceByTypeId",
+    "RelativePath": "api/PostPrices/GetPostPriceByTypeId/{typeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "typeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PostTypesController",
+    "Method": "GetPostTypes",
+    "RelativePath": "api/PostTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PostTypesController",
+    "Method": "GetPostType",
+    "RelativePath": "api/PostTypes/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "GetProperties",
     "RelativePath": "api/Properties",

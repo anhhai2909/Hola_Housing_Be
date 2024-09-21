@@ -20,6 +20,7 @@ builder.Services.AddScoped<IUserInterface, UserRepositories>();
 builder.Services.AddScoped<INewInterface, NewRepositories>();
 builder.Services.AddScoped<ITagInterface, TagRepositories>();
 builder.Services.AddScoped<IPartContentInterface, PartContentRepositories>();
+builder.Services.AddScoped<IPostTypeInterface, PostTypeRepositories>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
