@@ -26,6 +26,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "GetTagsByNewId",
+    "RelativePath": "api/News/GetTagsByNewId/{newId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.PostPriceController",
     "Method": "GetPostPrices",
     "RelativePath": "api/PostPrice",

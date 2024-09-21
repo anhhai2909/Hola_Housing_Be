@@ -1,5 +1,6 @@
 ﻿using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HolaHousing_BE.Repositories
 {
@@ -18,6 +19,11 @@ namespace HolaHousing_BE.Repositories
         public ICollection<New> GetNews()
         {
             return _context.News.ToList();
+        }
+
+        public ICollection<Tag> GetTagsByNewId(int id)
+        {
+            return _context.News.Include(n => n.Tags).FirstOrDefault(n=>n.NewId==id).Tags.ToList();
         }
 
         public bool IsExisted(int id)

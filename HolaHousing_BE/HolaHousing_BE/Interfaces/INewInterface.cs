@@ -7,5 +7,6 @@ namespace HolaHousing_BE.Interfaces
         ICollection<New> GetNews();
         New GetNew(int id);
         bool IsExisted(int id);
+        ICollection<Tag> GetTagsByNewId(int id);
     }
 }

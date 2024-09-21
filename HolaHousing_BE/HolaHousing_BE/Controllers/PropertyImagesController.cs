@@ -20,10 +20,6 @@ namespace HolaHousing_BE.Controllers
         [HttpGet("{id}")]
         public IActionResult GetPropertyImagesByProID(int id) {
             var list = _mapper.Map<List<PropertyImageDTO>>(_propertyImageInterface.GetPropertyImagesByPropertyID(id));
-            if (list == null)
-            {
-                return NotFound();
-            }
             return ModelState.IsValid ? Ok(list) : BadRequest(ModelState);
         }
     }

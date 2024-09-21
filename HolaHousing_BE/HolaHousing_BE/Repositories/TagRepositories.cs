@@ -1,5 +1,6 @@
 ﻿using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HolaHousing_BE.Repositories
 {
@@ -10,6 +11,12 @@ namespace HolaHousing_BE.Repositories
         {
             _context = context;
         }
+
+        public ICollection<New> GetNewsByTagId(int id)
+        {
+           return _context.Tags.Include(t=>t.News).FirstOrDefault(t=>t.TagId==id).News.ToList();
+        }
+
         public Tag GetTag(int id)
         {
             return _context.Tags.FirstOrDefault(t => t.TagId == id);

@@ -20,9 +20,6 @@ namespace HolaHousing_BE.Controllers
         [HttpGet]
         public IActionResult GetNews() { 
             var item = _mapper.Map<List<NewDTO>>(_newInterface.GetNews());
-            if (item == null) {
-                return NotFound();
-            }
             return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
@@ -32,6 +29,17 @@ namespace HolaHousing_BE.Controllers
                 return NotFound();
             }
             return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
+        }
+        [HttpGet("GetTagsByNewId/{newId}")]
+        public IActionResult GetTagsByNewId(int newId) {
+            var item = _mapper.Map<List<TagDTO>>(_newInterface.GetTagsByNewId(newId));
+            if (!ModelState.IsValid) { 
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                return Ok(item);
+            }
         }
     }
 }

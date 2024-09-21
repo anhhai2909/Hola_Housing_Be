@@ -25,7 +25,6 @@ namespace HolaHousing_BE.Models
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -252,7 +251,6 @@ namespace HolaHousing_BE.Models
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK__User__Role_ID__267ABA7A");
             });
-
             OnModelCreatingPartial(modelBuilder);
         }
 

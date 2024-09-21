@@ -20,10 +20,6 @@ namespace HolaHousing_BE.Controllers
         [HttpGet]
         public IActionResult GetTags() { 
             var item = _mapper.Map<List<TagDTO>>(_tagInterface.GetTags());
-            if(item == null)
-            {
-                return NotFound();
-            }
             return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
