@@ -21,6 +21,7 @@ builder.Services.AddScoped<INewInterface, NewRepositories>();
 builder.Services.AddScoped<ITagInterface, TagRepositories>();
 builder.Services.AddScoped<IPartContentInterface, PartContentRepositories>();
 builder.Services.AddScoped<IPostTypeInterface, PostTypeRepositories>();
+builder.Services.AddScoped<IAmentityInterface, AmentityRepositories>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 

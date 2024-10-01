@@ -8,6 +8,8 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
     {
         public MappingProfiles()
         {
+            CreateMap<Amentity, AmentityDTO>();
+            CreateMap<AmentityDTO, Amentity>();
             CreateMap<Property, PropertyDTO>();
             CreateMap<PropertyImage, PropertyImageDTO>();
             CreateMap<PostPrice, PostPriceDTO>();

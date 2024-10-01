@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace HolaHousing_BE.Models
 {
@@ -9,6 +8,7 @@ namespace HolaHousing_BE.Models
         public Property()
         {
             PropertyImages = new HashSet<PropertyImage>();
+            Amentities = new HashSet<Amentity>();
         }
 
         public int PropertyId { get; set; }
@@ -31,11 +31,10 @@ namespace HolaHousing_BE.Models
         public DateTime? UpdatedAt { get; set; }
         public int? PosterId { get; set; }
         public int? PostPriceId { get; set; }
-        [JsonIgnore]
+
         public virtual PostPrice? PostPrice { get; set; }
-        [JsonIgnore]
         public virtual User? Poster { get; set; }
-        [JsonIgnore]
         public virtual ICollection<PropertyImage> PropertyImages { get; set; }
+        public virtual ICollection<Amentity> Amentities { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace HolaHousing_BE.Controllers
         }
         [HttpGet]
         public IActionResult GetProperties() { 
-            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPreoperties());
+            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetProperties());
             foreach (var p in properties) {
                 if (_propertyInterface.GetPropertyByID(p.PropertyId).PropertyImages.Count > 0)
                 {
@@ -39,6 +39,12 @@ namespace HolaHousing_BE.Controllers
                 return NotFound();
             }
             return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
+        }
+        [HttpPost("GetPropertiesByAmentities")]
+        public IActionResult GetPropertiyByAmentities(List<int> amentities)
+        {
+            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesByAmentities(amentities));
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
     }
 }

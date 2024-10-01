@@ -11,7 +11,7 @@ namespace HolaHousing_BE.Repositories
         {
             _context = context;
         }
-        public ICollection<Property> GetPreoperties()
+        public ICollection<Property> GetProperties()
         {
             return _context.Properties.Include(p=>p.PropertyImages).Where(p=>p.Status==0).ToList();
         }
@@ -40,5 +40,25 @@ namespace HolaHousing_BE.Repositories
             return _context.Properties.FirstOrDefault(p => p.PropertyId == id) != null;
         }
 
+        public ICollection<Property> GetPropertiesByAmentities(List<int> amentities)
+        {
+            var properties = _context.Properties.Include(p => p.Amentities).ToList();
+            if (amentities.Count > 0)
+            {
+                var matchingProperties = new List<Property>();
+                foreach (var property in properties)
+                {
+                    if (amentities.All(a => property.Amentities.Any(amen => amen.AmentityId == a)))
+                    {
+                        matchingProperties.Add(property);
+                    }
+                }
+                return matchingProperties;
+            }
+            else
+            {
+                return properties;
+            }
+        }
     }
 }

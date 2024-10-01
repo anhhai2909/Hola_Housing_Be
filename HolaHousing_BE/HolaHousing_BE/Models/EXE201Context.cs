@@ -16,6 +16,7 @@ namespace HolaHousing_BE.Models
         {
         }
 
+        public virtual DbSet<Amentity> Amentities { get; set; } = null!;
         public virtual DbSet<New> News { get; set; } = null!;
         public virtual DbSet<PartContent> PartContents { get; set; } = null!;
         public virtual DbSet<PostPrice> PostPrices { get; set; } = null!;
@@ -25,15 +26,46 @@ namespace HolaHousing_BE.Models
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("MyCnn"));
-
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server =localhost; database = EXE201;uid=sa;pwd=123;TrustServerCertificate=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Amentity>(entity =>
+            {
+                entity.ToTable("Amentity");
+
+                entity.Property(e => e.AmentityId).HasColumnName("Amentity_ID");
+
+                entity.Property(e => e.Amentity_Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("Amentity");
+
+                entity.HasMany(d => d.Properties)
+                    .WithMany(p => p.Amentities)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AmentityProperty",
+                        l => l.HasOne<Property>().WithMany().HasForeignKey("PropertyId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Amentity___Prope__4CA06362"),
+                        r => r.HasOne<Amentity>().WithMany().HasForeignKey("AmentityId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Amentity___Ament__4BAC3F29"),
+                        j =>
+                        {
+                            j.HasKey("AmentityId", "PropertyId").HasName("PK__Amentity__BD991E964570FA03");
+
+                            j.ToTable("Amentity_Property");
+
+                            j.IndexerProperty<int>("AmentityId").HasColumnName("Amentity_ID");
+
+                            j.IndexerProperty<int>("PropertyId").HasColumnName("Property_ID");
+                        });
+            });
+
             modelBuilder.Entity<New>(entity =>
             {
                 entity.ToTable("New");
@@ -97,7 +129,7 @@ namespace HolaHousing_BE.Models
             modelBuilder.Entity<PostType>(entity =>
             {
                 entity.HasKey(e => e.TypeId)
-                    .HasName("PK__Post_Typ__FE90DDFE9105F90F");
+                    .HasName("PK__Post_Typ__FE90DDFE4F01145C");
 
                 entity.ToTable("Post_Type");
 
@@ -168,13 +200,11 @@ namespace HolaHousing_BE.Models
             modelBuilder.Entity<PropertyImage>(entity =>
             {
                 entity.HasKey(e => new { e.PropertyId, e.Image })
-                    .HasName("PK__Property__747EA80B4348C114");
+                    .HasName("PK__Property__747EA80B1FED6776");
 
                 entity.ToTable("Property_Image");
 
-                entity.Property(e => e.PropertyId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("Property_ID");
+                entity.Property(e => e.PropertyId).HasColumnName("Property_ID");
 
                 entity.Property(e => e.Image).HasMaxLength(200);
 
@@ -214,7 +244,7 @@ namespace HolaHousing_BE.Models
                         r => r.HasOne<Tag>().WithMany().HasForeignKey("TagId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__New_Tag__Tag_ID__3C69FB99"),
                         j =>
                         {
-                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD60CBF388D");
+                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD6306C6BFA");
 
                             j.ToTable("New_Tag");
 
@@ -251,6 +281,7 @@ namespace HolaHousing_BE.Models
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK__User__Role_ID__267ABA7A");
             });
+
             OnModelCreatingPartial(modelBuilder);
         }
 
