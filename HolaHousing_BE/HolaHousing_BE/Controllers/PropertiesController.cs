@@ -40,6 +40,16 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
         }
+        [HttpGet("SearchByLatAndLng")]
+        public IActionResult SearchByLatAndLng(double lat,double lng)
+        {
+            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, 10000));
+            if (properties == null)
+            {
+                return NotFound();
+            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
         [HttpPost("GetPropertiesByAmentities")]
         public IActionResult GetPropertiyByAmentities(List<int> amentities)
         {

@@ -252,6 +252,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "SearchByLatAndLng",
+    "RelativePath": "api/Properties/SearchByLatAndLng",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lat",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "lng",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.PropertyImagesController",
     "Method": "GetPropertyImagesByProID",
     "RelativePath": "api/PropertyImages/{id}",

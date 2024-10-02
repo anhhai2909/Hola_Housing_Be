@@ -1,4 +1,6 @@
-﻿namespace HolaHousing_BE.DTO
+﻿using HolaHousing_BE.Models;
+
+namespace HolaHousing_BE.DTO
 {
     public class NewDTO
     {
@@ -8,5 +10,9 @@
         public string? Author { get; set; }
         public DateTime? PostDate { get; set; }
         public int? CreatedBy { get; set; }
+        public virtual UserDTO? CreatedByNavigation { get; set; }
+        public virtual ICollection<PartContentDTO> PartContents { get; set; }
+
+        public virtual ICollection<TagDTO> Tags { get; set; }
     }
 }

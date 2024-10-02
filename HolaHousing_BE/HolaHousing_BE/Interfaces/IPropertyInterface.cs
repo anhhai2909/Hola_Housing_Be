@@ -9,5 +9,6 @@ namespace HolaHousing_BE.Interfaces
         Property GetPropertyByID(int id);
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
+        public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, double radiusInMeters);
     }
 }
