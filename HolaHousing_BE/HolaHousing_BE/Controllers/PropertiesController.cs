@@ -23,12 +23,6 @@ namespace HolaHousing_BE.Controllers
         [HttpGet]
         public IActionResult GetProperties() { 
             var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetProperties());
-            foreach (var p in properties) {
-                if (_propertyInterface.GetPropertyByID(p.PropertyId).PropertyImages.Count > 0)
-                {
-                    p.Image = _propertyInterface.GetFirstImage(p.PropertyId);
-                }
-            }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
@@ -40,6 +34,7 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
         }
+
         [HttpGet("SearchByLatAndLng")]
         public IActionResult SearchByLatAndLng(double lat,double lng)
         {
@@ -55,6 +50,71 @@ namespace HolaHousing_BE.Controllers
         {
             var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesByAmentities(amentities));
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
+        [HttpPost("Create")]
+        public IActionResult CreateProperty([FromBody] PropertyDTO propertyCreate)
+        {
+            if (propertyCreate == null)
+                return BadRequest(ModelState);
+          
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var propertyMap = _mapper.Map<Property>(propertyCreate);
+            propertyMap.PropertyId = 0;
+            if (!_propertyInterface.CreateProperty(propertyMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while savin");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
+        }
+
+        [HttpPut("Update/{propertyId}")]
+        public IActionResult UpdateProperty(int propertyId, [FromBody] PropertyDTO propertyUpdate)
+        {
+            if (propertyUpdate == null)
+                return BadRequest(ModelState);
+
+            if (propertyId != propertyUpdate.PropertyId)
+                return BadRequest(ModelState);
+
+            var existingProperty = _propertyInterface.GetPropertyByID(propertyId);
+            if (existingProperty == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _mapper.Map(propertyUpdate, existingProperty);
+
+            if (!_propertyInterface.UpdateProperty(existingProperty)) 
+            {
+                ModelState.AddModelError("", "Something went wrong updating property");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        [HttpDelete("{propertyId}")]
+        public IActionResult DeleteProperty(int propertyId) {
+            if (!_propertyInterface.IsExisted(propertyId))
+            {
+                return NotFound();
+            }
+
+            var propertyToDelete = _propertyInterface.GetPropertyByID(propertyId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_propertyInterface.DeleteProperty(propertyToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting property");
+            }
+
+            return NoContent();
         }
     }
 }

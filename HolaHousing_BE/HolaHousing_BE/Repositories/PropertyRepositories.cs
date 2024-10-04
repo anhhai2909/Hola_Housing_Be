@@ -7,9 +7,11 @@ namespace HolaHousing_BE.Repositories
     public class PropertyRepositories : IPropertyInterface
     {
         private readonly EXE201Context _context;
-        public PropertyRepositories(EXE201Context context)
+        private readonly IPropertyImageInterface _propertyImageInterface;
+        public PropertyRepositories(EXE201Context context,IPropertyImageInterface propertyImageInterface)
         {
             _context = context;
+            _propertyImageInterface = propertyImageInterface;
         }
         public ICollection<Property> GetProperties()
         {
@@ -61,7 +63,6 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Properties.FirstOrDefault(p => p.PropertyId == id) != null;
         }
-
         public ICollection<Property> GetPropertiesByAmentities(List<int> amentities)
         {
             var properties = _context.Properties
@@ -83,6 +84,33 @@ namespace HolaHousing_BE.Repositories
             {
                 return properties;
             }
+        }
+
+        public bool CreateProperty(Property property)
+        {
+            _context.Properties.Add(property);
+            return SaveChanged();
+        }
+
+        public bool SaveChanged()
+        {
+            return _context.SaveChanges() > 0 ? true : false;
+        }
+
+        public bool UpdateProperty(Property property)
+        {
+            _context.Properties.Update(property);
+            return SaveChanged();
+        }
+
+        public bool DeleteProperty(Property property)
+        {       
+            _context.PropertyImages
+            .Where(item => item.PropertyId == property.PropertyId)
+            .ToList()
+            .ForEach(item => _propertyImageInterface.DeletePropertyImage(item));
+            _context.Properties.Remove(property);
+            return SaveChanged();
         }
     }
 }

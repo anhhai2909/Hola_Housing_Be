@@ -25,7 +25,7 @@ namespace HolaHousing_BE.Models
         public virtual DbSet<PropertyImage> PropertyImages { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;      
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,6 +38,7 @@ namespace HolaHousing_BE.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Amentity>(entity =>
             {
                 entity.ToTable("Amentity");

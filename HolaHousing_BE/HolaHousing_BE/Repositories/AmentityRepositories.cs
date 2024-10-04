@@ -31,6 +31,7 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Amentities.FirstOrDefault(a=>a.AmentityId==id);
         }
+
         public bool SavedChange()
         {
             return _context.SaveChanges()>0?true:false;

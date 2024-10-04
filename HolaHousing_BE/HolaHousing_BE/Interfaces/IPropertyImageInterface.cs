@@ -6,5 +6,7 @@ namespace HolaHousing_BE.Interfaces
     {
         ICollection<PropertyImage> GetPropertyImages();
         ICollection<PropertyImage> GetPropertyImagesByPropertyID(int propertyID);
+        bool DeletePropertyImage(PropertyImage propertyImage);
+        bool SaveChanged();
     }
 }

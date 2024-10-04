@@ -13,6 +13,7 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
             CreateMap<Property, PropertyDTO>()
             .ForMember(dest => dest.PropertyImages, opt => opt.MapFrom(src => src.PropertyImages))
             .ForMember(dest => dest.Amentities, opt => opt.MapFrom(src => src.Amentities));
+            CreateMap<PropertyDTO, Property>();
             CreateMap<PropertyImage, PropertyImageDTO>();
             CreateMap<PostPrice, PostPriceDTO>();
             CreateMap<PostType, PostTypeDTO>();

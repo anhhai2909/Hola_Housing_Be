@@ -34,7 +34,7 @@ namespace HolaHousing_BE.Models
 
         public virtual PostPrice? PostPrice { get; set; }
         public virtual User? Poster { get; set; }
-        public virtual ICollection<PropertyImage> PropertyImages { get; set; }
-        public virtual ICollection<Amentity> Amentities { get; set; }
+        public virtual ICollection<PropertyImage>? PropertyImages { get; set; } = new List<PropertyImage>();
+        public virtual ICollection<Amentity>? Amentities { get; set; } = new List<Amentity>();
     }
 }

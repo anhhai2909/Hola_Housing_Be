@@ -237,6 +237,38 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "DeleteProperty",
+    "RelativePath": "api/Properties/{propertyId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "CreateProperty",
+    "RelativePath": "api/Properties/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyCreate",
+        "Type": "HolaHousing_BE.DTO.PropertyDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "GetPropertiyByAmentities",
     "RelativePath": "api/Properties/GetPropertiesByAmentities",
     "HttpMethod": "POST",
@@ -268,6 +300,27 @@
         "Name": "lng",
         "Type": "System.Double",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "UpdateProperty",
+    "RelativePath": "api/Properties/Update/{propertyId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "propertyUpdate",
+        "Type": "HolaHousing_BE.DTO.PropertyDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

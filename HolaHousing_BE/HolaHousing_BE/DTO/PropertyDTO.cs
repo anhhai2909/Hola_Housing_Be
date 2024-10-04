@@ -24,8 +24,7 @@ namespace HolaHousing_BE.DTO
         public DateTime? UpdatedAt { get; set; }
         public int? PosterId { get; set; }
         public int? PostPriceId { get; set; }
-        public string? Image {  get; set; }
-        public virtual ICollection<PropertyImageDTO> PropertyImages { get; set; }
-        public virtual ICollection<AmentityDTO> Amentities { get; set; }
+        public virtual ICollection<PropertyImageDTO>? PropertyImages { get; set; }
+        public virtual ICollection<AmentityDTO>? Amentities { get; set; }
     }
 }
