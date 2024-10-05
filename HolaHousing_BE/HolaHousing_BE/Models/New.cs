@@ -19,8 +19,8 @@ namespace HolaHousing_BE.Models
         public int? CreatedBy { get; set; }
 
         public virtual User? CreatedByNavigation { get; set; }
-        public virtual ICollection<PartContent> PartContents { get; set; }
+        public virtual ICollection<PartContent>? PartContents { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Tag>? Tags { get; set; }
     }
 }

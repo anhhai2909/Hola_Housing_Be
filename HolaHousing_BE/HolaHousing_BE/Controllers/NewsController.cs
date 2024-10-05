@@ -104,5 +104,68 @@ namespace HolaHousing_BE.Controllers
             }
             return Ok(relatedNews);
         }
+        [HttpPost("Create")]
+        public IActionResult CreateNew([FromBody] NewDTO newCreate)
+        {
+            if (newCreate == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var newMap = _mapper.Map<New>(newCreate);
+            newMap.NewId = 0;
+            if (!_newInterface.CreateNew(newMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while savin");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
+        }
+        [HttpPut("Update")]
+        public IActionResult UpdateNew([FromBody] NewDTO newUpdate)
+        {
+            if (newUpdate == null)
+                return BadRequest(ModelState);
+
+
+            var existingNew = _newInterface.GetNew(newUpdate.NewId);
+            if (existingNew == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _mapper.Map(newUpdate, existingNew);
+
+            if (!_newInterface.UpdateNew(existingNew))
+            {
+                ModelState.AddModelError("", "Something went wrong updating new");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        [HttpDelete("{newId}")]
+        public IActionResult DeleteNew(int newId)
+        {
+            if (!_newInterface.IsExisted(newId))
+            {
+                return NotFound();
+            }
+
+            var newToDelete = _newInterface.GetNew(newId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_newInterface.DeleteNew(newToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting new");
+            }
+
+            return NoContent();
+        }
     }
 }

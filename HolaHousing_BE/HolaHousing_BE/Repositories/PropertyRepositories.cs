@@ -104,13 +104,29 @@ namespace HolaHousing_BE.Repositories
         }
 
         public bool DeleteProperty(Property property)
-        {       
+        {
+            foreach (var item in _context.Amentities.Include(a=>a.Properties).ToList())
+            {
+                item.Properties = item.Properties
+                    .Where(amen => amen.PropertyId != property.PropertyId)
+                    .ToList();
+            }
             _context.PropertyImages
             .Where(item => item.PropertyId == property.PropertyId)
             .ToList()
             .ForEach(item => _propertyImageInterface.DeletePropertyImage(item));
             _context.Properties.Remove(property);
             return SaveChanged();
+        }
+
+        public User GetUserById(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserId == id);
+        }
+
+        public ICollection<Property> GetPropertiesByPoster(int posterId)
+        {
+            return _context.Properties.Where(p=>p.PosterId==posterId).ToList();
         }
     }
 }

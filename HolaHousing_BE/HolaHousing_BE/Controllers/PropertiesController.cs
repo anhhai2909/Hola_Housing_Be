@@ -116,5 +116,25 @@ namespace HolaHousing_BE.Controllers
 
             return NoContent();
         }
+        [HttpGet("GetOwnerProfile/{userId}")]
+        public IActionResult GetOwnerProfile(int userId)
+        {
+            var user = _mapper.Map<UserDTO>(_propertyInterface.GetUserById(userId));
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return ModelState.IsValid ? Ok(user) : BadRequest(ModelState);
+        }
+
+        [HttpGet("GetPropertiesByPoster/{posterId}")]
+        public IActionResult GetPropertiesByPoster(int posterId) {
+            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId));
+            if (properties == null)
+            {
+                return NotFound();
+            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
     }
 }

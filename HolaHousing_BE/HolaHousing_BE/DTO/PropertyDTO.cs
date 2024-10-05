@@ -17,7 +17,6 @@ namespace HolaHousing_BE.DTO
         public double? Area { get; set; }
         public double? Lat { get; set; }
         public double? Lng { get; set; }
-        public string? PhoneNum { get; set; }
         public string? Owner { get; set; }
         public int? Status { get; set; }
         public DateTime? CreatedAt { get; set; }

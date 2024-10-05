@@ -11,6 +11,29 @@ namespace HolaHousing_BE.Repositories
         {
                 _context = context;
         }
+
+        public bool CreateNew(New n)
+        {
+            _context.News.Add(n);
+            return SaveChanged();
+        }
+
+        public bool DeleteNew(New n)
+        {
+            foreach(var item in GetTagsByNewId(n.NewId))
+            {
+                foreach(var t in item.News)
+                {
+                    if(t.NewId == n.NewId)
+                    {
+                        item.News.Remove(t);
+                    }
+                }
+            }
+            _context.News.Remove(n);
+            return SaveChanged();
+        }
+
         public New GetNew(int id)
         {
             return _context.News.Include(n=>n.CreatedByNavigation)
@@ -46,6 +69,17 @@ namespace HolaHousing_BE.Repositories
         public bool IsExisted(int id)
         {
             return _context.News.FirstOrDefault(n => n.NewId == id) != null ? true : false;
+        }
+
+        public bool SaveChanged()
+        {
+            return _context.SaveChanges() > 0 ? true : false;
+        }
+
+        public bool UpdateNew(New n)
+        {
+            _context.News.Update(n);
+            return SaveChanged();
         }
     }
 }

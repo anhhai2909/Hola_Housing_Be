@@ -9,6 +9,9 @@ namespace HolaHousing_BE.Interfaces
         ICollection<Amentity> GetAmentitiesByProperty(int propertyId);
         bool UpdateAmentity(Amentity entity);
         bool AddAmentity(Amentity amentity);
+        bool ValidToUpdate(Amentity entity);
+        bool IsExisted(String amentityName);
+        bool DeleteAmentity(Amentity amentity);
         bool SavedChange();
     }
 }

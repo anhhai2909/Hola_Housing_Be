@@ -11,6 +11,22 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.AmentitiesController",
+    "Method": "DeleteAmentity",
+    "RelativePath": "api/Amentities/{amentityId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "amentityId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.AmentitiesController",
     "Method": "GetAmentity",
     "RelativePath": "api/Amentities/{id}",
     "HttpMethod": "GET",
@@ -27,6 +43,22 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.AmentitiesController",
+    "Method": "CreateAmentity",
+    "RelativePath": "api/Amentities/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "amentityCreate",
+        "Type": "HolaHousing_BE.DTO.AmentityDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.AmentitiesController",
     "Method": "GetAmentityByProperty",
     "RelativePath": "api/Amentities/GetAmentitiesByProperty/{id}",
     "HttpMethod": "GET",
@@ -36,6 +68,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.AmentitiesController",
+    "Method": "UpdateAmentity",
+    "RelativePath": "api/Amentities/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "amentityUpdate",
+        "Type": "HolaHousing_BE.DTO.AmentityDTO",
         "IsRequired": true
       }
     ],
@@ -62,6 +110,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "DeleteNew",
+    "RelativePath": "api/News/{newId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "CreateNew",
+    "RelativePath": "api/News/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newCreate",
+        "Type": "HolaHousing_BE.DTO.NewDTO",
         "IsRequired": true
       }
     ],
@@ -100,6 +180,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "UpdateNew",
+    "RelativePath": "api/News/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUpdate",
+        "Type": "HolaHousing_BE.DTO.NewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
     "Method": "GetPartContents",
     "RelativePath": "api/PartContents",
@@ -127,6 +223,54 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "DeletePartContent",
+    "RelativePath": "api/PartContents/{partContentId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partContentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "CreatePartContent",
+    "RelativePath": "api/PartContents/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partContentCreate",
+        "Type": "HolaHousing_BE.DTO.PartContentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "DeletePartContentByNew",
+    "RelativePath": "api/PartContents/DeletePCByNewId/{newId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
     "Method": "GetPartContentsByNewId",
     "RelativePath": "api/PartContents/GetPartContentsByNewId/{newId}",
     "HttpMethod": "GET",
@@ -136,6 +280,22 @@
       {
         "Name": "newId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PartContentsController",
+    "Method": "UpdatePartContent",
+    "RelativePath": "api/PartContents/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partContentUpdate",
+        "Type": "HolaHousing_BE.DTO.PartContentDTO",
         "IsRequired": true
       }
     ],
@@ -269,6 +429,22 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetOwnerProfile",
+    "RelativePath": "api/Properties/GetOwnerProfile/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "GetPropertiyByAmentities",
     "RelativePath": "api/Properties/GetPropertiesByAmentities",
     "HttpMethod": "POST",
@@ -278,6 +454,22 @@
       {
         "Name": "amentities",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetPropertiesByPoster",
+    "RelativePath": "api/Properties/GetPropertiesByPoster/{posterId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "posterId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -342,6 +534,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertyImagesController",
+    "Method": "CreatePropertyImage",
+    "RelativePath": "api/PropertyImages/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyImageCreate",
+        "Type": "HolaHousing_BE.DTO.PropertyImageDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertyImagesController",
+    "Method": "DeletePropertyImage",
+    "RelativePath": "api/PropertyImages/DeletePropertyImage",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "image",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.TagsController",
     "Method": "GetTags",
     "RelativePath": "api/Tags",
@@ -369,6 +598,38 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "DeleteTag",
+    "RelativePath": "api/Tags/{tagId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tagId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "CreateTag",
+    "RelativePath": "api/Tags/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tagCreate",
+        "Type": "HolaHousing_BE.DTO.TagDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
     "Method": "GetNewsByTagId",
     "RelativePath": "api/Tags/GetNewsByTagId/{id}",
     "HttpMethod": "GET",
@@ -378,6 +639,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.TagsController",
+    "Method": "UpdateProperty",
+    "RelativePath": "api/Tags/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tagUpdate",
+        "Type": "HolaHousing_BE.DTO.TagDTO",
         "IsRequired": true
       }
     ],

@@ -11,10 +11,21 @@ namespace HolaHousing_BE.Repositories
             _context = context;
         }
 
+        public bool CreatePropertyImage(PropertyImage propertyImage)
+        {
+            _context.PropertyImages.Add(propertyImage);
+            return SaveChanged();
+        }
+
         public bool DeletePropertyImage(PropertyImage propertyImage)
         {
             _context.PropertyImages.Remove(propertyImage);
             return SaveChanged();
+        }
+
+        public PropertyImage GetPropertyImage(PropertyImage propertyImage)
+        {
+            return _context.PropertyImages.FirstOrDefault(p => p.PropertyId == propertyImage.PropertyId && p.Image.Equals(propertyImage.Image));
         }
 
         public ICollection<PropertyImage> GetPropertyImages()
@@ -25,6 +36,11 @@ namespace HolaHousing_BE.Repositories
         public ICollection<PropertyImage> GetPropertyImagesByPropertyID(int propertyID)
         {
             return _context.PropertyImages.Where(p=>p.PropertyId==propertyID).ToList();
+        }
+
+        public bool IsExisted(PropertyImage propertyImage)
+        {
+            return _context.PropertyImages.FirstOrDefault(p => p.PropertyId == propertyImage.PropertyId && p.Image.Equals(propertyImage.Image)) != null ? true : false;
         }
 
         public bool SaveChanged()

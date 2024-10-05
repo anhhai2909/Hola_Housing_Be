@@ -7,6 +7,10 @@ namespace HolaHousing_BE.Interfaces
         ICollection<New> GetNews();
         New GetNew(int id);
         bool IsExisted(int id);
+        bool DeleteNew(New n);
+        bool UpdateNew(New n);
+        bool CreateNew(New n);
+        bool SaveChanged();
         ICollection<Tag> GetTagsByNewId(int id);
         //n la so New muon random
         List<New> GetRandomNews(int id,int n);

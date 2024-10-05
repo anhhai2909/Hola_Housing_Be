@@ -6,6 +6,7 @@ namespace HolaHousing_BE.Interfaces
     {
         ICollection<Property> GetProperties();
         ICollection<Property> GetPropertiesByAmentities(List<int> amentities);
+        ICollection<Property> GetPropertiesByPoster(int posterId);
         Property GetPropertyByID(int id);
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
@@ -13,6 +14,7 @@ namespace HolaHousing_BE.Interfaces
         bool CreateProperty(Property property);
         bool UpdateProperty(Property property);
         bool DeleteProperty(Property property);
+        User GetUserById(int id);
         bool SaveChanged();
     }
 }
