@@ -2,6 +2,7 @@
 using HolaHousing_BE.DTO;
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
@@ -33,6 +34,16 @@ namespace HolaHousing_BE.Controllers
                 return NotFound();
             }
             return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
+        }
+        [HttpGet("GetPhoneNum/{userId}")]
+        public IActionResult GetPhoneNumByID(int userId)
+        {
+            String phoneNum = _propertyInterface.GetPhone(userId);
+            if (String.IsNullOrEmpty(phoneNum))
+            {
+                return NotFound();
+            }
+            return ModelState.IsValid ? Ok(phoneNum) : BadRequest(ModelState);
         }
 
         [HttpGet("SearchByLatAndLng")]

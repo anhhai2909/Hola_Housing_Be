@@ -445,6 +445,22 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetPhoneNumByID",
+    "RelativePath": "api/Properties/GetPhoneNum/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "GetPropertiyByAmentities",
     "RelativePath": "api/Properties/GetPropertiesByAmentities",
     "HttpMethod": "POST",

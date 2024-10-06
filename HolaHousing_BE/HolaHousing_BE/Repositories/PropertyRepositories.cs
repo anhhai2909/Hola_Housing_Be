@@ -128,5 +128,10 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Properties.Where(p=>p.PosterId==posterId).ToList();
         }
+
+        public string GetPhone(int userId)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserId == userId).PhoneNum;
+        }
     }
 }

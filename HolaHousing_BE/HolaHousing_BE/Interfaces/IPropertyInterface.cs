@@ -11,6 +11,7 @@ namespace HolaHousing_BE.Interfaces
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
         public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, double radiusInMeters);
+        String GetPhone(int userId);
         bool CreateProperty(Property property);
         bool UpdateProperty(Property property);
         bool DeleteProperty(Property property);
