@@ -1,4 +1,5 @@
-﻿using HolaHousing_BE.Interfaces;
+﻿using HolaHousing_BE.DTO;
+using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,11 +14,65 @@ namespace HolaHousing_BE.Repositories
             _context = context;
             _propertyImageInterface = propertyImageInterface;
         }
+        public ICollection<Property> SearchProperty(int? sortBy,String? searchString
+            , String? propertyType
+            ,String? address,String? city
+            ,String? district, String? ward
+            ,decimal? priceFrom,decimal? priceTo)
+        {
+            var query = _context.Properties.AsQueryable();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.Content.ToLower().Contains(searchString.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(propertyType))
+            {
+                query = query.Where(p => p.PropertyType.ToLower().Equals(propertyType.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(address))
+            {
+                query = query.Where(p => p.Address.ToLower().Equals(address.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(city))
+            {
+                query = query.Where(p => p.City.ToLower().Equals(city.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(district))
+            {
+                query = query.Where(p => p.District.ToLower().Equals(district.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(ward))
+            {
+                query = query.Where(p => p.Ward.ToLower().Equals(ward.ToLower()));
+            }
+            if (priceFrom >= 0 && priceTo > 0)
+            {
+                query = query.Where(p => p.Price >= priceFrom && p.Price <= priceTo);
+            }
+            switch (sortBy)
+            {
+                case 1: 
+                    query = query.OrderBy(p => p.Price);
+                    break;
+                case 2: 
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+                case 3:
+                    query = query.OrderByDescending(p => p.PostTime);
+                    break;
+                default:
+                    query = query.OrderBy(p => p.PostTime);
+                    break;
+            }
+
+            return query.ToList();
+        }
         public ICollection<Property> GetProperties()
         {
             return _context.Properties
                 .Include(p=>p.Amentities)
                 .Include(p=>p.PropertyImages)
+                .Include(p=>p.PostPrices)
                 .Where(p=>p.Status==0).ToList();
         }
         public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, double radiusInMeters)
@@ -35,6 +90,7 @@ namespace HolaHousing_BE.Repositories
                     <= radiusInKm)
                 .Include(p => p.Amentities)
                 .Include(p => p.PropertyImages)
+                .Include(p => p.PostPrices)
                 .ToList();
         }
         public Property GetPropertyByID(int id)
@@ -44,6 +100,7 @@ namespace HolaHousing_BE.Repositories
                 return _context.Properties
                     .Include(p => p.Amentities)
                     .Include(p => p.PropertyImages)
+                    .Include(p => p.PostPrices)
                     .FirstOrDefault(p => p.PropertyId == id);
             }
             else
@@ -67,7 +124,8 @@ namespace HolaHousing_BE.Repositories
         {
             var properties = _context.Properties
                 .Include(p => p.PropertyImages)
-                .Include(p => p.Amentities).ToList();
+                .Include(p => p.Amentities)
+                .Include(p => p.PostPrices).ToList();
             if (amentities.Count > 0)
             {
                 var matchingProperties = new List<Property>();
@@ -111,6 +169,16 @@ namespace HolaHousing_BE.Repositories
                     .Where(amen => amen.PropertyId != property.PropertyId)
                     .ToList();
             }
+            foreach(var item in _context.PostPrices.ToList())
+            {
+                foreach(var p in item.Properties)
+                {
+                    if(p.PropertyId == property.PropertyId)
+                    {
+                        item.Properties.Remove(p);
+                    }
+                }
+            }
             _context.PropertyImages
             .Where(item => item.PropertyId == property.PropertyId)
             .ToList()
@@ -126,7 +194,11 @@ namespace HolaHousing_BE.Repositories
 
         public ICollection<Property> GetPropertiesByPoster(int posterId)
         {
-            return _context.Properties.Where(p=>p.PosterId==posterId).ToList();
+            return _context.Properties
+                .Include(p => p.PropertyImages)
+                .Include(p => p.Amentities)
+                .Include(p => p.PostPrices)
+                .Where(p=>p.PosterId==posterId).ToList();
         }
 
         public string GetPhone(int userId)
@@ -143,6 +215,22 @@ namespace HolaHousing_BE.Repositories
                 .Take(pageSize)
                 .ToList();
             return pagedProperties;
+        }
+
+        public ICollection<SmallPropertyDTO> paging(List<SmallPropertyDTO> list, int pageSize, int pageNumber)
+        {
+            if (pageSize <= 0)
+            {
+                throw new ArgumentException("Page size must be greater than zero.", nameof(pageSize));
+            }
+
+            if (pageNumber < 1)
+            {
+                throw new ArgumentException("Page number must be greater than or equal to one.", nameof(pageNumber));
+            }
+            int skip = (pageNumber - 1) * pageSize;
+            var pagedList = list.Skip(skip).Take(pageSize).ToList();
+            return pagedList;
         }
     }
 }

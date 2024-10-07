@@ -493,6 +493,72 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "SearchAndFilter",
+    "RelativePath": "api/Properties/SearchAndFilter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sortBy",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "searchString",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "propertyType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "city",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "district",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ward",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "priceFrom",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "priceTo",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "SearchByLatAndLng",
     "RelativePath": "api/Properties/SearchByLatAndLng",
     "HttpMethod": "GET",

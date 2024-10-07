@@ -9,6 +9,7 @@ namespace HolaHousing_BE.Models
         {
             PropertyImages = new HashSet<PropertyImage>();
             Amentities = new HashSet<Amentity>();
+            PostPrices = new HashSet<PostPrice>();
         }
 
         public int PropertyId { get; set; }
@@ -30,11 +31,10 @@ namespace HolaHousing_BE.Models
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? PosterId { get; set; }
-        public int? PostPriceId { get; set; }
 
-        public virtual PostPrice? PostPrice { get; set; }
         public virtual User? Poster { get; set; }
-        public virtual ICollection<PropertyImage>? PropertyImages { get; set; } = new List<PropertyImage>();
-        public virtual ICollection<Amentity>? Amentities { get; set; } = new List<Amentity>();
+        public virtual ICollection<PropertyImage> PropertyImages { get; set; }
+        public virtual ICollection<Amentity> Amentities { get; set; }
+        public virtual ICollection<PostPrice> PostPrices { get; set; }
     }
 }

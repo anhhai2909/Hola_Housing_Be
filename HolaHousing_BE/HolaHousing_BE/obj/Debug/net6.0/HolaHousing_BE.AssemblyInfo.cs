@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HolaHousing_BE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2dfd51f26f87eeb00979843f3a20d6603a1debf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5da6d4e64846a587c9ad7406f86119365f083b7a")]
 [assembly: System.Reflection.AssemblyProductAttribute("HolaHousing_BE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HolaHousing_BE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

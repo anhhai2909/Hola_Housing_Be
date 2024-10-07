@@ -21,9 +21,48 @@ namespace HolaHousing_BE.Controllers
             _propertyInterface = propertyInterface;
             _mapper = mapper;
         }
+
+        
         [HttpGet]
-        public IActionResult GetProperties() { 
-            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetProperties());
+        public IActionResult GetProperties() {            
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetProperties());
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break; 
+                    }
+                }
+            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
+        [HttpGet("SearchAndFilter")]
+        public IActionResult SearchAndFilter([FromQuery] int? sortBy, [FromQuery] String? searchString
+            , [FromQuery] String? propertyType, [FromQuery] String? address
+            , [FromQuery] String? city, [FromQuery] String? district
+            , [FromQuery] String? ward, [FromQuery] decimal? priceFrom
+            , [FromQuery] decimal? priceTo, [FromQuery] int pageSize
+            , [FromQuery] int pageNumber)
+        {
+            var properties = _propertyInterface.paging(_mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.SearchProperty(sortBy, searchString
+                , propertyType, address
+                , city, district
+                , ward, priceFrom
+                , priceTo)), pageSize, pageNumber);
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break;
+                    }
+                }
+            }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
@@ -49,17 +88,47 @@ namespace HolaHousing_BE.Controllers
         [HttpGet("SearchByLatAndLng")]
         public IActionResult SearchByLatAndLng(double lat,double lng)
         {
-            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, 10000));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, 10000));
             if (properties == null)
             {
                 return NotFound();
+            }
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break;
+                    }
+                    else
+                    {
+                        item.ManyImg = false;
+                    }
+                }
             }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpPost("GetPropertiesByAmentities")]
         public IActionResult GetPropertiyByAmentities(List<int> amentities)
         {
-            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesByAmentities(amentities));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByAmentities(amentities));
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break;
+                    }
+                    else
+                    {
+                        item.ManyImg = false;
+                    }
+                }
+            }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpPost("Create")]
@@ -140,10 +209,25 @@ namespace HolaHousing_BE.Controllers
 
         [HttpGet("GetPropertiesByPoster/{posterId}")]
         public IActionResult GetPropertiesByPoster(int posterId) {
-            var properties = _mapper.Map<List<PropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId));
             if (properties == null)
             {
                 return NotFound();
+            }
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break;
+                    }
+                    else
+                    {
+                        item.ManyImg = false;
+                    }
+                }
             }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }

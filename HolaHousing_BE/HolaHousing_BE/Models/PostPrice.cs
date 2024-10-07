@@ -16,6 +16,7 @@ namespace HolaHousing_BE.Models
         public int? TypeId { get; set; }
 
         public virtual PostType? Type { get; set; }
+
         public virtual ICollection<Property> Properties { get; set; }
     }
 }

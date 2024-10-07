@@ -10,9 +10,13 @@ namespace NguyenAnhHai_Assignment1_PRN231.AutoMapper
         {
             CreateMap<Amentity, AmentityDTO>();
             CreateMap<AmentityDTO, Amentity>();
+            CreateMap<Property, SmallPropertyDTO>()
+                .ForMember(dest => dest.PropertyImages, opt => opt.MapFrom(src => src.PropertyImages))
+                .ForMember(dest => dest.PostPrices, opt => opt.MapFrom(src => src.PostPrices));
             CreateMap<Property, PropertyDTO>()
             .ForMember(dest => dest.PropertyImages, opt => opt.MapFrom(src => src.PropertyImages))
-            .ForMember(dest => dest.Amentities, opt => opt.MapFrom(src => src.Amentities));
+            .ForMember(dest => dest.Amentities, opt => opt.MapFrom(src => src.Amentities))
+            .ForMember(dest => dest.PostPrices, opt => opt.MapFrom(src => src.PostPrices));
             CreateMap<PropertyDTO, Property>();
             CreateMap<PropertyImage, PropertyImageDTO>();
             CreateMap<PropertyImageDTO, PropertyImage>();
