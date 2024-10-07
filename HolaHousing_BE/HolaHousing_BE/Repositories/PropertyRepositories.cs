@@ -133,5 +133,16 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Users.FirstOrDefault(u => u.UserId == userId).PhoneNum;
         }
+
+        public ICollection<Property> paging(int pageSize, int pageNumber)
+        {      
+            var properties = GetProperties();
+
+            var pagedProperties = properties
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return pagedProperties;
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace HolaHousing_BE.Interfaces
         ICollection<Property> GetProperties();
         ICollection<Property> GetPropertiesByAmentities(List<int> amentities);
         ICollection<Property> GetPropertiesByPoster(int posterId);
+        ICollection<Property> paging(int pageSize,int pageNumber);
         Property GetPropertyByID(int id);
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
