@@ -19,6 +19,10 @@ namespace HolaHousing_BE.Interfaces
         bool DeleteProperty(Property property);
         User GetUserById(int id);
         ICollection<Property> GetPropertiesByPosterAndStatus(int userId, int status);
+        PropertyDeclineReason GetPropertyDeclineReason(int proId,int? reasonId);
+        bool AddPropertyDeclineReason(int proId, int? reasonId, String others);
+        bool DeletePropertyDeclineReasons(int proId);
+        ICollection<PropertyDeclineReason> GetReasonsByPro(int proId);
         bool UpdateStatus(int propertyId, int status);
         ICollection<Property> SearchProperty(int? sortBy, String? searchString
             , String? propertyType, String? address

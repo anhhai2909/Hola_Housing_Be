@@ -22,6 +22,7 @@ builder.Services.AddScoped<ITagInterface, TagRepositories>();
 builder.Services.AddScoped<IPartContentInterface, PartContentRepositories>();
 builder.Services.AddScoped<IPostTypeInterface, PostTypeRepositories>();
 builder.Services.AddScoped<IAmentityInterface, AmentityRepositories>();
+builder.Services.AddScoped<IDeclineReasonInterface, DeclineReasonRepositories>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddCors(options =>
 {

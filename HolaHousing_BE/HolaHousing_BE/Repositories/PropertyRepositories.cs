@@ -14,6 +14,10 @@ namespace HolaHousing_BE.Repositories
             _context = context;
             _propertyImageInterface = propertyImageInterface;
         }
+        public ICollection<PropertyDeclineReason> GetReasonsByPro(int proId)
+        {
+            return _context.PropertyDeclineReasons.Include(p=>p.Reason).Where(p=>p.PropertyId==proId).ToList();
+        }
         public ICollection<Property> SearchProperty(int? sortBy,String? searchString
             , String? propertyType
             ,String? address,String? city
@@ -245,6 +249,31 @@ namespace HolaHousing_BE.Repositories
             pro.Status = status;
             _context.Properties.Update(pro);
             return SaveChanged();
+        }
+
+        public bool AddPropertyDeclineReason(int proId, int? reasonId, string others)
+        {
+            PropertyDeclineReason p = new PropertyDeclineReason();
+            p.PropertyId = proId;
+            if(reasonId != null)
+            {
+                p.ReasonId = reasonId;
+            }         
+            p.Others = others;
+            _context.PropertyDeclineReasons.Add(p);
+            return SaveChanged();
+        }
+
+        public bool DeletePropertyDeclineReasons(int proId)
+        {
+            var item = _context.PropertyDeclineReasons.Where(p=>p.PropertyId==proId).ToList();
+            _context.PropertyDeclineReasons.RemoveRange(item);
+            return SaveChanged();
+        }
+
+        public PropertyDeclineReason GetPropertyDeclineReason(int proId, int? reasonId)
+        {
+            return _context.PropertyDeclineReasons.FirstOrDefault(p => p.PropertyId == proId && p.ReasonId == reasonId);
         }
     }
 }

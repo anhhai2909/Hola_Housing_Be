@@ -91,6 +91,17 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
         }
+        [HttpGet("GetDeclineReasons")]
+        public IActionResult GetDeclineReason(int proId)
+        {
+            var reasons = _propertyInterface.GetReasonsByPro(proId);
+            if (reasons == null)
+            {
+                return NotFound();
+            }
+            return ModelState.IsValid ? Ok(reasons) : BadRequest(ModelState);
+        }
+
         [HttpGet("GetPhoneNum/{userId}")]
         public IActionResult GetPhoneNumByID(int userId)
         {
@@ -169,6 +180,24 @@ namespace HolaHousing_BE.Controllers
             return Ok("Successfully created");
         }
 
+        [HttpPost("CreatePropertyDeclineReason")]
+        public IActionResult CreateProperTyDeclineReason([FromQuery] int proId, [FromQuery] int? reasonId, [FromQuery] String? others)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (_propertyInterface.GetPropertyDeclineReason(proId, reasonId) != null)
+            {
+                return BadRequest("Existed");
+            }
+            if (!_propertyInterface.AddPropertyDeclineReason(proId,reasonId,others))
+            {
+                ModelState.AddModelError("", "Something went wrong while savin");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
+        }
+
         [HttpPut("Update/{propertyId}")]
         public IActionResult UpdateProperty(int propertyId, [FromBody] PropertyDTO propertyUpdate)
         {
@@ -235,6 +264,19 @@ namespace HolaHousing_BE.Controllers
             if (!_propertyInterface.DeleteProperty(propertyToDelete))
             {
                 ModelState.AddModelError("", "Something went wrong deleting property");
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("DeleteProDeclineReasonByPro")]
+        public IActionResult DeleteProDeclineReasonByPro(int propertyId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_propertyInterface.DeletePropertyDeclineReasons(propertyId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting property decline reason");
             }
 
             return NoContent();

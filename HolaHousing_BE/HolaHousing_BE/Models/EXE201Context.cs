@@ -17,11 +17,13 @@ namespace HolaHousing_BE.Models
         }
 
         public virtual DbSet<Amentity> Amentities { get; set; } = null!;
+        public virtual DbSet<DeclineReason> DeclineReasons { get; set; } = null!;
         public virtual DbSet<New> News { get; set; } = null!;
         public virtual DbSet<PartContent> PartContents { get; set; } = null!;
         public virtual DbSet<PostPrice> PostPrices { get; set; } = null!;
         public virtual DbSet<PostType> PostTypes { get; set; } = null!;
         public virtual DbSet<Property> Properties { get; set; } = null!;
+        public virtual DbSet<PropertyDeclineReason> PropertyDeclineReasons { get; set; } = null!;
         public virtual DbSet<PropertyImage> PropertyImages { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
@@ -56,7 +58,7 @@ namespace HolaHousing_BE.Models
                         r => r.HasOne<Amentity>().WithMany().HasForeignKey("AmentityId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Amentity___Ament__4222D4EF"),
                         j =>
                         {
-                            j.HasKey("AmentityId", "PropertyId").HasName("PK__Amentity__BD991E969413D791");
+                            j.HasKey("AmentityId", "PropertyId").HasName("PK__Amentity__BD991E966BB36A8D");
 
                             j.ToTable("Amentity_Property");
 
@@ -64,6 +66,20 @@ namespace HolaHousing_BE.Models
 
                             j.IndexerProperty<int>("PropertyId").HasColumnName("Property_ID");
                         });
+            });
+
+            modelBuilder.Entity<DeclineReason>(entity =>
+            {
+                entity.HasKey(e => e.ReasonId)
+                    .HasName("PK__Decline___3435D2D78F205A10");
+
+                entity.ToTable("Decline_Reason");
+
+                entity.Property(e => e.ReasonId).HasColumnName("Reason_ID");
+
+                entity.Property(e => e.ReasonContent)
+                    .HasMaxLength(100)
+                    .HasColumnName("Reason_Content");
             });
 
             modelBuilder.Entity<New>(entity =>
@@ -129,7 +145,7 @@ namespace HolaHousing_BE.Models
             modelBuilder.Entity<PostType>(entity =>
             {
                 entity.HasKey(e => e.TypeId)
-                    .HasName("PK__Post_Typ__FE90DDFE49B96570");
+                    .HasName("PK__Post_Typ__FE90DDFEBC56E67E");
 
                 entity.ToTable("Post_Type");
 
@@ -197,7 +213,7 @@ namespace HolaHousing_BE.Models
                         r => r.HasOne<Property>().WithMany().HasForeignKey("PropertyId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__Property___Prope__45F365D3"),
                         j =>
                         {
-                            j.HasKey("PropertyId", "PostPriceId").HasName("PK__Property__1C6DB2D643208711");
+                            j.HasKey("PropertyId", "PostPriceId").HasName("PK__Property__1C6DB2D67AD16FC4");
 
                             j.ToTable("Property_PostPrice");
 
@@ -207,10 +223,36 @@ namespace HolaHousing_BE.Models
                         });
             });
 
+            modelBuilder.Entity<PropertyDeclineReason>(entity =>
+            {
+                entity.HasKey(e => new { e.PropertyId, e.ReasonId })
+                    .HasName("PK__Property__4414BBDB1CCEF9E2");
+
+                entity.ToTable("Property_Decline_Reason");
+
+                entity.Property(e => e.PropertyId).HasColumnName("Property_ID");
+
+                entity.Property(e => e.ReasonId).HasColumnName("Reason_ID");
+
+                entity.Property(e => e.Others).HasMaxLength(100);
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.PropertyDeclineReasons)
+                    .HasForeignKey(d => d.PropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Property___Prope__4BAC3F29");
+
+                entity.HasOne(d => d.Reason)
+                    .WithMany(p => p.PropertyDeclineReasons)
+                    .HasForeignKey(d => d.ReasonId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Property___Reaso__4CA06362");
+            });
+
             modelBuilder.Entity<PropertyImage>(entity =>
             {
                 entity.HasKey(e => new { e.PropertyId, e.Image })
-                    .HasName("PK__Property__747EA80B84027BBA");
+                    .HasName("PK__Property__747EA80BE22E9941");
 
                 entity.ToTable("Property_Image");
 
@@ -254,7 +296,7 @@ namespace HolaHousing_BE.Models
                         r => r.HasOne<Tag>().WithMany().HasForeignKey("TagId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__New_Tag__Tag_ID__3C69FB99"),
                         j =>
                         {
-                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD69BCF2182");
+                            j.HasKey("TagId", "NewId").HasName("PK__New_Tag__2A0D5FD6E6C21697");
 
                             j.ToTable("New_Tag");
 
