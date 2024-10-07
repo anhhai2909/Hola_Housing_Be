@@ -493,6 +493,27 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetProsByPosterAndStatus",
+    "RelativePath": "api/Properties/GetProsByPosterAndStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "posterId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "statusId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "SearchAndFilter",
     "RelativePath": "api/Properties/SearchAndFilter",
     "HttpMethod": "GET",
@@ -595,6 +616,27 @@
         "Name": "propertyUpdate",
         "Type": "HolaHousing_BE.DTO.PropertyDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Properties/UpdateStatus",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "propertyId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

@@ -146,6 +146,7 @@ namespace HolaHousing_BE.Repositories
 
         public bool CreateProperty(Property property)
         {
+            property.Status = 0;
             _context.Properties.Add(property);
             return SaveChanged();
         }
@@ -231,6 +232,19 @@ namespace HolaHousing_BE.Repositories
             int skip = (pageNumber - 1) * pageSize;
             var pagedList = list.Skip(skip).Take(pageSize).ToList();
             return pagedList;
+        }
+
+        public ICollection<Property> GetPropertiesByPosterAndStatus(int userId, int status)
+        {
+            return _context.Properties.Where(p=>p.PosterId==userId&&p.Status==status).ToList();
+        }
+
+        public bool UpdateStatus(int propertyId, int status)
+        {
+            var pro = _context.Properties.FirstOrDefault(p => p.PropertyId == propertyId);
+            pro.Status = status;
+            _context.Properties.Update(pro);
+            return SaveChanged();
         }
     }
 }

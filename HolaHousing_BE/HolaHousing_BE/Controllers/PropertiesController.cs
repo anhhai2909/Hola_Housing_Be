@@ -22,7 +22,24 @@ namespace HolaHousing_BE.Controllers
             _mapper = mapper;
         }
 
-        
+        [HttpGet("GetProsByPosterAndStatus")]
+        public IActionResult GetProsByPosterAndStatus([FromQuery] int posterId, [FromQuery] int statusId)
+        {
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPosterAndStatus(posterId,statusId));
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break;
+                    }
+                }
+            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
+
         [HttpGet]
         public IActionResult GetProperties() {            
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetProperties());
@@ -174,6 +191,32 @@ namespace HolaHousing_BE.Controllers
             {
                 ModelState.AddModelError("", "Something went wrong updating property");
                 return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+        [HttpPut("UpdateStatus")]
+        public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status)
+        {
+            if (propertyId == null || status == null)
+                return BadRequest(ModelState);
+
+            if(_propertyInterface.GetPropertyByID(propertyId) == null)
+            {
+                return NotFound();
+            }
+            ;
+
+            if (!_propertyInterface.UpdateStatus(propertyId, status))
+            {
+                ModelState.AddModelError("", "Something went wrong updating status");
+                return StatusCode(500, ModelState);
+            }
+            if(status == 0)
+            {
+                Console.WriteLine("property has been declined");
+            }else if(status == 1)
+            {
+                Console.WriteLine("property has been approved");
             }
             return NoContent();
         }

@@ -18,6 +18,8 @@ namespace HolaHousing_BE.Interfaces
         bool UpdateProperty(Property property);
         bool DeleteProperty(Property property);
         User GetUserById(int id);
+        ICollection<Property> GetPropertiesByPosterAndStatus(int userId, int status);
+        bool UpdateStatus(int propertyId, int status);
         ICollection<Property> SearchProperty(int? sortBy, String? searchString
             , String? propertyType, String? address
             , String? city, String? district
