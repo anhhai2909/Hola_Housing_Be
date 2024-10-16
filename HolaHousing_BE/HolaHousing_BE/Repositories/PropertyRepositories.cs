@@ -251,7 +251,7 @@ namespace HolaHousing_BE.Repositories
             return SaveChanged();
         }
 
-        public bool AddPropertyDeclineReason(int proId, int? reasonId, string others)
+        public bool AddPropertyDeclineReason(int proId, int reasonId, string others)
         {
             PropertyDeclineReason p = new PropertyDeclineReason();
             p.PropertyId = proId;
@@ -274,6 +274,11 @@ namespace HolaHousing_BE.Repositories
         public PropertyDeclineReason GetPropertyDeclineReason(int proId, int? reasonId)
         {
             return _context.PropertyDeclineReasons.FirstOrDefault(p => p.PropertyId == proId && p.ReasonId == reasonId);
+        }
+
+        public bool AddPropertyDeclineReason(int proId, int? reasonId, string others)
+        {
+            throw new NotImplementedException();
         }
     }
 }

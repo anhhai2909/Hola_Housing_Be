@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace HolaHousing_BE.Models
 {
@@ -8,6 +9,7 @@ namespace HolaHousing_BE.Models
         public User()
         {
             News = new HashSet<New>();
+            Notifications = new HashSet<Notification>();
             Properties = new HashSet<Property>();
         }
 
@@ -21,6 +23,8 @@ namespace HolaHousing_BE.Models
 
         public virtual Role? Role { get; set; }
         public virtual ICollection<New> News { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
     }
 }

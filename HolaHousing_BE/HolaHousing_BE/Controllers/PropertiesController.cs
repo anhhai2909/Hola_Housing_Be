@@ -2,11 +2,10 @@
 using HolaHousing_BE.DTO;
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Mvc;
-using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace HolaHousing_BE.Controllers
 {
@@ -14,18 +13,22 @@ namespace HolaHousing_BE.Controllers
     [ApiController]
     public class PropertiesController : ControllerBase
     {
+        private readonly INotificationInterface _notificationInterface;
         private readonly IPropertyInterface _propertyInterface;
         private readonly IMapper _mapper;
-        public PropertiesController(IPropertyInterface propertyInterface,IMapper mapper)
+        private readonly NotificationService _notificationService;
+        public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext)
         {
+            _notificationInterface = notificationInterface;
             _propertyInterface = propertyInterface;
             _mapper = mapper;
+            _notificationService = new NotificationService(hubContext);
         }
 
         [HttpGet("GetProsByPosterAndStatus")]
         public IActionResult GetProsByPosterAndStatus([FromQuery] int posterId, [FromQuery] int statusId)
         {
-            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPosterAndStatus(posterId,statusId));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPosterAndStatus(posterId, statusId));
             foreach (var item in properties)
             {
                 foreach (var p in item.PostPrices)
@@ -41,7 +44,8 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProperties() {            
+        public IActionResult GetProperties()
+        {
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetProperties());
             foreach (var item in properties)
             {
@@ -50,7 +54,7 @@ namespace HolaHousing_BE.Controllers
                     if (p.PostPriceId == 1)
                     {
                         item.ManyImg = true;
-                        break; 
+                        break;
                     }
                 }
             }
@@ -83,9 +87,10 @@ namespace HolaHousing_BE.Controllers
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
-        public IActionResult GetPropertiyByID(int id) { 
+        public IActionResult GetPropertiyByID(int id)
+        {
             var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
-            if(property == null)
+            if (property == null)
             {
                 return NotFound();
             }
@@ -114,7 +119,7 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("SearchByLatAndLng")]
-        public IActionResult SearchByLatAndLng(double lat,double lng)
+        public IActionResult SearchByLatAndLng(double lat, double lng)
         {
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, 10000));
             if (properties == null)
@@ -164,7 +169,7 @@ namespace HolaHousing_BE.Controllers
         {
             if (propertyCreate == null)
                 return BadRequest(ModelState);
-          
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -189,7 +194,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return BadRequest("Existed");
             }
-            if (!_propertyInterface.AddPropertyDeclineReason(proId,reasonId,others))
+            if (!_propertyInterface.AddPropertyDeclineReason(proId, reasonId, others))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
@@ -216,7 +221,7 @@ namespace HolaHousing_BE.Controllers
 
             _mapper.Map(propertyUpdate, existingProperty);
 
-            if (!_propertyInterface.UpdateProperty(existingProperty)) 
+            if (!_propertyInterface.UpdateProperty(existingProperty))
             {
                 ModelState.AddModelError("", "Something went wrong updating property");
                 return StatusCode(500, ModelState);
@@ -229,7 +234,7 @@ namespace HolaHousing_BE.Controllers
             if (propertyId == null || status == null)
                 return BadRequest(ModelState);
 
-            if(_propertyInterface.GetPropertyByID(propertyId) == null)
+            if (_propertyInterface.GetPropertyByID(propertyId) == null)
             {
                 return NotFound();
             }
@@ -240,17 +245,40 @@ namespace HolaHousing_BE.Controllers
                 ModelState.AddModelError("", "Something went wrong updating status");
                 return StatusCode(500, ModelState);
             }
-            if(status == 0)
+            int userId = 1;
+            if (status == 0)
             {
-                Console.WriteLine("property has been declined");
-            }else if(status == 1)
+                Notification n = new Notification
+                {
+                    Title = "Từ chối tin đăng",
+                    Description = "Tin đăng của bạn đã bị từ chối, xem thông báo để biết chi tiết",
+                    CreatedDate = DateTime.Now,
+                    Url = "/list/",
+                    IsRead = false,
+                    UserId = userId
+                };
+                _notificationInterface.AddNotification(n);
+                _notificationService.SendNotification(n, userId);
+            }
+            else if (status == 1)
             {
-                Console.WriteLine("property has been approved");
+                Notification n = new Notification
+                {
+                    Title = "Tin đăng được đăng tải thành công",
+                    Description = "Tin đăng của bạn đã được duyệt thành công",
+                    CreatedDate = DateTime.Now,
+                    Url = "/detail/5",
+                    IsRead = false,
+                    UserId = userId
+                };
+                _notificationInterface.AddNotification(n);
+                _notificationService.SendNotification(n, userId);
             }
             return NoContent();
         }
         [HttpDelete("{propertyId}")]
-        public IActionResult DeleteProperty(int propertyId) {
+        public IActionResult DeleteProperty(int propertyId)
+        {
             if (!_propertyInterface.IsExisted(propertyId))
             {
                 return NotFound();
@@ -293,7 +321,8 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("GetPropertiesByPoster/{posterId}")]
-        public IActionResult GetPropertiesByPoster(int posterId) {
+        public IActionResult GetPropertiesByPoster(int posterId)
+        {
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId));
             if (properties == null)
             {
@@ -316,5 +345,58 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
+
+        //public async Task<string> UploadImage(IFormFile file, string name)
+        //{
+        //    string clientId = "f260b84e886a6c3";
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await file.CopyToAsync(memoryStream);
+        //        byte[] fileBytes = memoryStream.ToArray();
+
+        //        using (var client = new HttpClient())
+        //        {
+        //            // Thêm Client ID của bạn vào header Authorization
+        //            client.DefaultRequestHeaders.Add("Authorization", "Client-ID " + clientId);
+
+        //            // Tạo nội dung multipart form để gửi file lên
+        //            var content = new MultipartFormDataContent();
+        //            content.Add(new ByteArrayContent(fileBytes), "image", name);
+
+        //            // Gửi yêu cầu POST lên Imgur API
+        //            var response = await client.PostAsync("https://api.imgur.com/3/upload", content);
+        //            var responseData = await response.Content.ReadAsStringAsync();
+        //            var imageUrl = JsonConvert.DeserializeObject<ImgurResponseData>(responseData);
+        //            return imageUrl.Data.Link; // Kết quả trả về chứa URL của ảnh đã upload
+        //        }
+        //    }
+        //}
     }
+}
+
+public class ImgurResponseData
+{
+    public ImgurImageDataViewModel Data { get; set; }
+    public bool Success { get; set; }
+    public int Status { get; set; }
+}
+
+public class ImgurImageDataViewModel
+{
+    public string Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string Datetime { get; set; }
+    public string Type { get; set; }
+    public bool Animated { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int Size { get; set; }
+    public int Views { get; set; }
+    public int Bandwidth { get; set; }
+    public string Ddeletehash { get; set; }
+    public string Section { get; set; }
+    public string Link { get; set; }
+    public string Account_url { get; set; }
+    public int Aaccount_id { get; set; }
 }
