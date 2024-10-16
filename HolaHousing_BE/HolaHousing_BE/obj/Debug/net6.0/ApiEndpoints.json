@@ -431,7 +431,7 @@
     "Parameters": [
       {
         "Name": "propertyCreate",
-        "Type": "HolaHousing_BE.DTO.PropertyDTO",
+        "Type": "HolaHousing_BE.Models.Property",
         "IsRequired": true
       }
     ],
@@ -682,7 +682,7 @@
       },
       {
         "Name": "propertyUpdate",
-        "Type": "HolaHousing_BE.DTO.PropertyDTO",
+        "Type": "HolaHousing_BE.Models.Property",
         "IsRequired": true
       }
     ],

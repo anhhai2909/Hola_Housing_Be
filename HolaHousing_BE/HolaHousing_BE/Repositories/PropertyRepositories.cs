@@ -105,6 +105,7 @@ namespace HolaHousing_BE.Repositories
                     .Include(p => p.Amentities)
                     .Include(p => p.PropertyImages)
                     .Include(p => p.PostPrices)
+                    .Include(p=>p.PropertyDeclineReasons)
                     .FirstOrDefault(p => p.PropertyId == id);
             }
             else

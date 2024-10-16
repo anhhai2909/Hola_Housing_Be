@@ -1,8 +1,7 @@
-
-
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
 using HolaHousing_BE.Repositories;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +32,6 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader();
     });
 });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

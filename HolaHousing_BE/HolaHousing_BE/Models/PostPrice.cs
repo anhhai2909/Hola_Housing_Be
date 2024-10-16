@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace HolaHousing_BE.Models
 {
@@ -16,7 +17,7 @@ namespace HolaHousing_BE.Models
         public int? TypeId { get; set; }
 
         public virtual PostType? Type { get; set; }
-
-        public virtual ICollection<Property> Properties { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Property>? Properties { get; set; }
     }
 }

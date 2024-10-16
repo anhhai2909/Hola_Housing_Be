@@ -84,7 +84,7 @@ namespace HolaHousing_BE.Controllers
         }
         [HttpGet("{id}")]
         public IActionResult GetPropertiyByID(int id) { 
-            var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
+            var property = _propertyInterface.GetPropertyByID(id);
             if(property == null)
             {
                 return NotFound();
