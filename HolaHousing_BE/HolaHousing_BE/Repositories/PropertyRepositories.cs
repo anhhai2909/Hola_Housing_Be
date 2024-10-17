@@ -9,20 +9,20 @@ namespace HolaHousing_BE.Repositories
     {
         private readonly EXE201Context _context;
         private readonly IPropertyImageInterface _propertyImageInterface;
-        public PropertyRepositories(EXE201Context context,IPropertyImageInterface propertyImageInterface)
+        public PropertyRepositories(EXE201Context context, IPropertyImageInterface propertyImageInterface)
         {
             _context = context;
             _propertyImageInterface = propertyImageInterface;
         }
         public ICollection<PropertyDeclineReason> GetReasonsByPro(int proId)
         {
-            return _context.PropertyDeclineReasons.Include(p=>p.Reason).Where(p=>p.PropertyId==proId).ToList();
+            return _context.PropertyDeclineReasons.Include(p => p.Reason).Where(p => p.PropertyId == proId).ToList();
         }
-        public ICollection<Property> SearchProperty(int? sortBy,String? searchString
+        public ICollection<Property> SearchProperty(int? sortBy, String? searchString
             , String? propertyType
-            ,String? address,String? city
-            ,String? district, String? ward
-            ,decimal? priceFrom,decimal? priceTo)
+            , String? address, String? city
+            , String? district, String? ward
+            , decimal? priceFrom, decimal? priceTo)
         {
             var query = _context.Properties.AsQueryable();
             if (!string.IsNullOrEmpty(searchString))
@@ -55,10 +55,10 @@ namespace HolaHousing_BE.Repositories
             }
             switch (sortBy)
             {
-                case 1: 
+                case 1:
                     query = query.OrderBy(p => p.Price);
                     break;
-                case 2: 
+                case 2:
                     query = query.OrderByDescending(p => p.Price);
                     break;
                 case 3:
@@ -74,18 +74,19 @@ namespace HolaHousing_BE.Repositories
         public ICollection<Property> GetProperties()
         {
             return _context.Properties
-                .Include(p=>p.Amentities)
-                .Include(p=>p.PropertyImages)
-                .Include(p=>p.PostPrices)
-                .Where(p=>p.Status==0).ToList();
+                .Include(p => p.Amentities)
+                .Include(p => p.PropertyImages)
+                .Include(p => p.PostPrices)
+                .Where(p => p.Status == 0).ToList();
         }
-        public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, double radiusInMeters)
+        public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, int pid, double radiusInMeters)
         {
             double radiusInKm = radiusInMeters / 1000.0;
-            const double EarthRadiusKm = 6371; 
+            const double EarthRadiusKm = 6371;
 
             return _context.Properties
                 .Where(p => p.Lat.HasValue && p.Lng.HasValue)
+                .Where(p => p.PropertyId != pid)
                 .Where(p =>
                     EarthRadiusKm *
                     2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin((p.Lat.Value - latitude) * Math.PI / 180 / 2), 2) +
@@ -105,14 +106,14 @@ namespace HolaHousing_BE.Repositories
                     .Include(p => p.Amentities)
                     .Include(p => p.PropertyImages)
                     .Include(p => p.PostPrices)
-                    .Include(p=>p.PropertyDeclineReasons)
+                    .Include(p => p.PropertyDeclineReasons)
                     .FirstOrDefault(p => p.PropertyId == id);
             }
             else
             {
                 return null;
             }
-            
+
         }
         public string GetFirstImage(int id)
         {
@@ -181,7 +182,9 @@ namespace HolaHousing_BE.Repositories
                         .Where(r => property.PropertyDeclineReasons.Select(pr => pr.ReasonId).Contains(r.ReasonId))
                         .ToList());
             }
-
+            DateTime dateTime = DateTime.Now;
+            property.CreatedAt = dateTime;
+            property.UpdatedAt = dateTime;
             _context.Properties.Add(property);
             _context.SaveChanges();
 
@@ -203,7 +206,7 @@ namespace HolaHousing_BE.Repositories
 
             if (existingProperty == null)
             {
-                return 0; 
+                return 0;
             }
 
             existingProperty.Content = property.Content;
@@ -221,7 +224,7 @@ namespace HolaHousing_BE.Repositories
             existingProperty.PhoneNum = property.PhoneNum;
             existingProperty.Owner = property.Owner;
             existingProperty.Status = property.Status;
-            existingProperty.UpdatedAt = DateTime.Now; 
+            existingProperty.UpdatedAt = DateTime.Now;
 
             if (property.Amentities != null)
             {
@@ -253,17 +256,17 @@ namespace HolaHousing_BE.Repositories
 
         public bool DeleteProperty(Property property)
         {
-            foreach (var item in _context.Amentities.Include(a=>a.Properties).ToList())
+            foreach (var item in _context.Amentities.Include(a => a.Properties).ToList())
             {
                 item.Properties = item.Properties
                     .Where(amen => amen.PropertyId != property.PropertyId)
                     .ToList();
             }
-            foreach(var item in _context.PostPrices.ToList())
+            foreach (var item in _context.PostPrices.ToList())
             {
-                foreach(var p in item.Properties)
+                foreach (var p in item.Properties)
                 {
-                    if(p.PropertyId == property.PropertyId)
+                    if (p.PropertyId == property.PropertyId)
                     {
                         item.Properties.Remove(p);
                     }
@@ -282,13 +285,15 @@ namespace HolaHousing_BE.Repositories
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
 
-        public ICollection<Property> GetPropertiesByPoster(int posterId)
+        public ICollection<Property> GetPropertiesByPoster(int posterId, int pid)
         {
             return _context.Properties
                 .Include(p => p.PropertyImages)
                 .Include(p => p.Amentities)
                 .Include(p => p.PostPrices)
-                .Where(p=>p.PosterId==posterId).ToList();
+                .Where(p => p.PosterId == posterId)
+                .Where(p => p.PropertyId != pid)
+                .ToList();
         }
 
         public string GetPhone(int userId)
@@ -297,7 +302,7 @@ namespace HolaHousing_BE.Repositories
         }
 
         public ICollection<Property> paging(int pageSize, int pageNumber)
-        {      
+        {
             var properties = GetProperties();
 
             var pagedProperties = properties
@@ -325,7 +330,7 @@ namespace HolaHousing_BE.Repositories
 
         public ICollection<Property> GetPropertiesByPosterAndStatus(int userId, int status)
         {
-            return _context.Properties.Where(p=>p.PosterId==userId&&p.Status==status).ToList();
+            return _context.Properties.Where(p => p.PosterId == userId && p.Status == status).ToList();
         }
 
         public bool UpdateStatus(int propertyId, int status)
@@ -340,10 +345,10 @@ namespace HolaHousing_BE.Repositories
         {
             PropertyDeclineReason p = new PropertyDeclineReason();
             p.PropertyId = proId;
-            if(reasonId != null)
+            if (reasonId != null)
             {
                 p.ReasonId = reasonId;
-            }         
+            }
             p.Others = others;
             _context.PropertyDeclineReasons.Add(p);
             return SaveChanged();
@@ -351,7 +356,7 @@ namespace HolaHousing_BE.Repositories
 
         public bool DeletePropertyDeclineReasons(int proId)
         {
-            var item = _context.PropertyDeclineReasons.Where(p=>p.PropertyId==proId).ToList();
+            var item = _context.PropertyDeclineReasons.Where(p => p.PropertyId == proId).ToList();
             _context.PropertyDeclineReasons.RemoveRange(item);
             return SaveChanged();
         }

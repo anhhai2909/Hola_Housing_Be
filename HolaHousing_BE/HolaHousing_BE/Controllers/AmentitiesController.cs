@@ -42,7 +42,7 @@ namespace HolaHousing_BE.Controllers
                 return BadRequest(ModelState);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            if (_amentityInterface.IsExisted(amentityCreate.Amentity_Name))
+            if (_amentityInterface.IsExisted(amentityCreate.AmentityName))
                 return BadRequest(ModelState);
             var amentityMap = _mapper.Map<Amentity>(amentityCreate);
             amentityMap.AmentityId = 0;

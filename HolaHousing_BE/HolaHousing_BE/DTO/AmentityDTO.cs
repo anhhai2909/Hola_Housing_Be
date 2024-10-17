@@ -3,6 +3,6 @@
     public class AmentityDTO
     {
         public int AmentityId { get; set; }
-        public string? Amentity_Name { get; set; }
+        public string? AmentityName { get; set; }
     }
 }

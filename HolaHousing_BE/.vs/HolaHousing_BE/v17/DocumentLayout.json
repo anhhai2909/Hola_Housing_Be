@@ -1,30 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\",
+  "WorkspaceRootPath": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\controllers\\propertiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\propertiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\repositories\\propertyrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\repositories\\propertyrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\repositories\\propertyrepositories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\interfaces\\ipropertyinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\interfaces\\ipropertyinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\interfaces\\ipropertyinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\automapper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\automapper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\controllers\\propertiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\controllers\\propertiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\models\\property.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\dto\\smallpropertydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\dto\\smallpropertydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\models\\property.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\models\\property.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\hoctap\\exe201\\holahousing\\hola_housing_be\\holahousing_be\\holahousing_be\\models\\postprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\models\\postprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\dto\\propertydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\dto\\propertydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\dto\\propertyimagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\dto\\propertyimagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\models\\propertyimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\models\\propertyimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|d:\\cms\\exe101_anhptm\\projects\\holahousing_be\\holahousing_be\\holahousing_be\\models\\amentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C745194-3777-4087-A5E7-D00428F399A2}|HolaHousing_BE\\HolaHousing_BE.csproj|solutionrelative:holahousing_be\\models\\amentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +46,123 @@
       "DocumentGroups": [
         {
           "DockedHeight": 284,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "IPropertyInterface.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
               "RelativeDocumentMoniker": "HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
               "RelativeToolTip": "HolaHousing_BE\\Interfaces\\IPropertyInterface.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA1wBAAAAAuAAAAAAAAAA==",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAawBAAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T15:41:58.13Z",
+              "WhenOpened": "2024-10-17T18:56:06.075Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MappingProfiles.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
-              "RelativeToolTip": "HolaHousing_BE\\AutoMapper\\MappingProfiles.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAmwBMAAABgAAAAAAAAAA==",
+              "Title": "SmallPropertyDTO.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\SmallPropertyDTO.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\DTO\\SmallPropertyDTO.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\SmallPropertyDTO.cs",
+              "RelativeToolTip": "HolaHousing_BE\\DTO\\SmallPropertyDTO.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-14T09:32:53.39Z",
+              "WhenOpened": "2024-10-17T18:47:51.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PropertyImage.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\PropertyImage.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Models\\PropertyImage.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\PropertyImage.cs",
+              "RelativeToolTip": "HolaHousing_BE\\Models\\PropertyImage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T18:42:39.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PropertyImageDTO.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\PropertyImageDTO.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\DTO\\PropertyImageDTO.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\PropertyImageDTO.cs",
+              "RelativeToolTip": "HolaHousing_BE\\DTO\\PropertyImageDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T18:42:35.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Amentity.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Amentity.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Models\\Amentity.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Amentity.cs",
+              "RelativeToolTip": "HolaHousing_BE\\Models\\Amentity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T18:41:40.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "PostPrice.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Models\\PostPrice.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Models\\PostPrice.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Models\\PostPrice.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Models\\PostPrice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Title": "PropertyDTO.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\PropertyDTO.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\DTO\\PropertyDTO.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\DTO\\PropertyDTO.cs",
+              "RelativeToolTip": "HolaHousing_BE\\DTO\\PropertyDTO.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAA2wBkAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T15:24:34.658Z",
+              "WhenOpened": "2024-10-17T18:40:22.618Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Property.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Property.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Property.cs",
               "RelativeDocumentMoniker": "HolaHousing_BE\\Models\\Property.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Property.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Models\\Property.cs",
               "RelativeToolTip": "HolaHousing_BE\\Models\\Property.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAIwCsAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAABgAAAAAAAAAAAAIwCAAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T15:21:39.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PropertyRepositories.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAwwN8AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T15:17:27.894Z",
+              "WhenOpened": "2024-10-17T18:40:13.711Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PropertiesController.cs",
-              "DocumentMoniker": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PropertiesController.cs",
-              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\PropertiesController.cs",
-              "ToolTip": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PropertiesController.cs",
-              "RelativeToolTip": "HolaHousing_BE\\Controllers\\PropertiesController.cs",
-              "ViewState": "AgIAAMEAAAAAAAAAAADwv9AAAAApAAAAAAAAAA==",
+              "Title": "PropertyRepositories.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
+              "RelativeToolTip": "HolaHousing_BE\\Repositories\\PropertyRepositories.cs",
+              "ViewState": "AQIAAKgAAAAAAAAAAADwv7oAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-14T09:41:56.58Z",
+              "WhenOpened": "2024-10-17T18:38:45.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PropertiesController.cs",
+              "DocumentMoniker": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PropertiesController.cs",
+              "RelativeDocumentMoniker": "HolaHousing_BE\\Controllers\\PropertiesController.cs",
+              "ToolTip": "D:\\cms\\EXE101_AnhPTM\\Projects\\holahousing_be\\HolaHousing_BE\\HolaHousing_BE\\Controllers\\PropertiesController.cs",
+              "RelativeToolTip": "HolaHousing_BE\\Controllers\\PropertiesController.cs",
+              "ViewState": "AQIAAKUAAAAAAAAAAAAWwLoAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T18:34:25.229Z",
               "EditorCaption": ""
             }
           ]

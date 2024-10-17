@@ -7,12 +7,12 @@ namespace HolaHousing_BE.Interfaces
     {
         ICollection<Property> GetProperties();
         ICollection<Property> GetPropertiesByAmentities(List<int> amentities);
-        ICollection<Property> GetPropertiesByPoster(int posterId);
+        ICollection<Property> GetPropertiesByPoster(int posterId, int pid);
         ICollection<SmallPropertyDTO> paging(List<SmallPropertyDTO> list,int pageSize,int pageNumber);
         Property GetPropertyByID(int id);
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
-        public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, double radiusInMeters);
+        public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, int pid, double radiusInMeters);
         String GetPhone(int userId);
         int CreateProperty(Property property);
         int UpdateProperty(Property property);

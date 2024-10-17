@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace HolaHousing_BE.Models
 {
@@ -12,7 +13,7 @@ namespace HolaHousing_BE.Models
 
         public int RoleId { get; set; }
         public string? RoleName { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }
 }

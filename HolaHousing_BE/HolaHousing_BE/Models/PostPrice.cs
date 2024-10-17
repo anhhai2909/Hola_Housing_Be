@@ -9,6 +9,7 @@ namespace HolaHousing_BE.Models
         public PostPrice()
         {
             Properties = new HashSet<Property>();
+            PropertiesNavigation = new HashSet<Property>();
         }
 
         public int PostPriceId { get; set; }
@@ -18,6 +19,8 @@ namespace HolaHousing_BE.Models
 
         public virtual PostType? Type { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Property>? Properties { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Property> PropertiesNavigation { get; set; }
     }
 }

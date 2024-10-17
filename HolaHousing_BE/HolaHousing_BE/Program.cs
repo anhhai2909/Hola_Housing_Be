@@ -1,7 +1,7 @@
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
 using HolaHousing_BE.Repositories;
-
+using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<INotificationInterface, NotificationRepositories>();
 builder.Services.AddScoped<IPropertyInterface, PropertyRepositories>();
 builder.Services.AddScoped<IPropertyImageInterface, PropertyImageRepositories>();
 builder.Services.AddScoped<IPostPriceInterface, PostPriceRepositories>();
@@ -23,15 +24,7 @@ builder.Services.AddScoped<IPostTypeInterface, PostTypeRepositories>();
 builder.Services.AddScoped<IAmentityInterface, AmentityRepositories>();
 builder.Services.AddScoped<IDeclineReasonInterface, DeclineReasonRepositories>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("CorsPolicy", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,5 +39,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors("CorsPolicy");
+app.MapHub<NotificationHub>("/notificationHub");
+
+app.UseCors(x => x
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .SetIsOriginAllowed(origin => true)
+        .AllowCredentials());
+
 app.Run();

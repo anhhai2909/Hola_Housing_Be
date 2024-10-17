@@ -47,7 +47,7 @@ namespace HolaHousing_BE.Repositories
         public bool IsExisted(string amentityName)
         {
             return _context.Amentities
-                .FirstOrDefault(a => a.Amentity_Name
+                .FirstOrDefault(a => a.AmentityName
                                 .ToLower()
                                 .Equals(amentityName.ToLower().Trim())) != null ? true : false;
         }
@@ -67,9 +67,9 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Amentities
                 .Where(a => a.AmentityId != entity.AmentityId 
-                            && a.Amentity_Name
+                            && a.AmentityName
                             .ToLower()
-                            .Equals(entity.Amentity_Name
+                            .Equals(entity.AmentityName
                                     .ToLower().Trim()))
                 .ToList().Count() == 0 ? true : false;
         }

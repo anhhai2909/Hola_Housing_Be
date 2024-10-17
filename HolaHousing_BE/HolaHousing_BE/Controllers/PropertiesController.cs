@@ -2,9 +2,11 @@
 using HolaHousing_BE.DTO;
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
 using System.Collections.Generic;
 
@@ -14,12 +16,16 @@ namespace HolaHousing_BE.Controllers
     [ApiController]
     public class PropertiesController : ControllerBase
     {
+        private readonly INotificationInterface _notificationInterface;
         private readonly IPropertyInterface _propertyInterface;
         private readonly IMapper _mapper;
-        public PropertiesController(IPropertyInterface propertyInterface,IMapper mapper)
+        private readonly NotificationService _notificationService;
+        public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext)
         {
+            _notificationInterface = notificationInterface;
             _propertyInterface = propertyInterface;
             _mapper = mapper;
+            _notificationService = new NotificationService(hubContext);
         }
 
         [HttpGet("GetProsByPosterAndStatus")]
@@ -83,8 +89,8 @@ namespace HolaHousing_BE.Controllers
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpGet("{id}")]
-        public IActionResult GetPropertiyByID(int id) { 
-            var property = _propertyInterface.GetPropertyByID(id);
+        public IActionResult GetPropertiyByID(int id) {
+            var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
             if(property == null)
             {
                 return NotFound();
@@ -114,9 +120,9 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("SearchByLatAndLng")]
-        public IActionResult SearchByLatAndLng(double lat,double lng)
+        public IActionResult SearchByLatAndLng(double lat,double lng, int pid)
         {
-            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, 10000));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, pid, 10000));
             if (properties == null)
             {
                 return NotFound();
@@ -238,12 +244,35 @@ namespace HolaHousing_BE.Controllers
                 ModelState.AddModelError("", "Something went wrong updating status");
                 return StatusCode(500, ModelState);
             }
-            if(status == 0)
+
+            int userId = 1;
+            if (status == 0)
             {
-                Console.WriteLine("property has been declined");
-            }else if(status == 1)
+                Notification n = new Notification
+                {
+                    Title = "Từ chối tin đăng",
+                    Description = "Tin đăng của bạn đã bị từ chối, xem thông báo để biết chi tiết",
+                    CreatedDate = DateTime.Now,
+                    Url = "/list/",
+                    IsRead = false,
+                    UserId = userId
+                };
+                _notificationInterface.AddNotification(n);
+                _notificationService.SendNotification(n, userId);
+            }
+            else if (status == 1)
             {
-                Console.WriteLine("property has been approved");
+                Notification n = new Notification
+                {
+                    Title = "Tin đăng được đăng tải thành công",
+                    Description = "Tin đăng của bạn đã được duyệt thành công",
+                    CreatedDate = DateTime.Now,
+                    Url = "/detail/" + propertyId,
+                    IsRead = false,
+                    UserId = userId
+                };
+                _notificationInterface.AddNotification(n);
+                _notificationService.SendNotification(n, userId);
             }
             return NoContent();
         }
@@ -291,8 +320,8 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("GetPropertiesByPoster/{posterId}")]
-        public IActionResult GetPropertiesByPoster(int posterId) {
-            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId));
+        public IActionResult GetPropertiesByPoster(int posterId, [FromQuery] int pid) {
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId, pid));
             if (properties == null)
             {
                 return NotFound();
