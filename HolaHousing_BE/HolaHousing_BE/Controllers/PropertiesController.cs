@@ -160,7 +160,7 @@ namespace HolaHousing_BE.Controllers
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
         [HttpPost("Create")]
-        public IActionResult CreateProperty([FromBody] PropertyDTO propertyCreate)
+        public IActionResult CreateProperty([FromBody] Property propertyCreate)
         {
             if (propertyCreate == null)
                 return BadRequest(ModelState);
@@ -169,15 +169,16 @@ namespace HolaHousing_BE.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var propertyMap = _mapper.Map<Property>(propertyCreate);
-            propertyMap.PropertyId = 0;
-            if (!_propertyInterface.CreateProperty(propertyMap))
-            {
-                ModelState.AddModelError("", "Something went wrong while savin");
-                return StatusCode(500, ModelState);
-            }
+            //var propertyMap = _mapper.Map<Property>(propertyCreate);
+            //propertyMap.PropertyId = 0;
+            propertyCreate.PropertyId = 0;
+            //if (!_propertyInterface.CreateProperty(propertyCreate))
+            //{
+            //    ModelState.AddModelError("", "Something went wrong while savin");
+            //    return StatusCode(500, ModelState);
+            //}
 
-            return Ok("Successfully created");
+            return Ok(_propertyInterface.CreateProperty(propertyCreate));
         }
 
         [HttpPost("CreatePropertyDeclineReason")]
@@ -198,30 +199,27 @@ namespace HolaHousing_BE.Controllers
             return Ok("Successfully created");
         }
 
-        [HttpPut("Update/{propertyId}")]
-        public IActionResult UpdateProperty(int propertyId, [FromBody] PropertyDTO propertyUpdate)
+        [HttpPut("Update")]
+        public IActionResult UpdateProperty([FromBody] Property propertyUpdate)
         {
             if (propertyUpdate == null)
                 return BadRequest(ModelState);
 
-            if (propertyId != propertyUpdate.PropertyId)
-                return BadRequest(ModelState);
-
-            var existingProperty = _propertyInterface.GetPropertyByID(propertyId);
+            var existingProperty = _propertyInterface.GetPropertyByID(propertyUpdate.PropertyId);
             if (existingProperty == null)
                 return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _mapper.Map(propertyUpdate, existingProperty);
+            //_mapper.Map(propertyUpdate, existingProperty);
 
-            if (!_propertyInterface.UpdateProperty(existingProperty)) 
-            {
-                ModelState.AddModelError("", "Something went wrong updating property");
-                return StatusCode(500, ModelState);
-            }
-            return NoContent();
+            //if (!_propertyInterface.UpdateProperty(propertyUpdate)) 
+            //{
+            //    ModelState.AddModelError("", "Something went wrong updating property");
+            //    return StatusCode(500, ModelState);
+            //}
+            return Ok(_propertyInterface.UpdateProperty(propertyUpdate));
         }
         [HttpPut("UpdateStatus")]
         public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status)

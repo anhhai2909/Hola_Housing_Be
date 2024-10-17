@@ -670,16 +670,11 @@
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "UpdateProperty",
-    "RelativePath": "api/Properties/Update/{propertyId}",
+    "RelativePath": "api/Properties/Update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "propertyId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
       {
         "Name": "propertyUpdate",
         "Type": "HolaHousing_BE.Models.Property",

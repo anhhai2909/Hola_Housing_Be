@@ -148,12 +148,44 @@ namespace HolaHousing_BE.Repositories
                 return properties;
             }
         }
+        public virtual User? Poster { get; set; }
+        public virtual ICollection<PropertyDeclineReason>? PropertyDeclineReasons { get; set; }
+        public virtual ICollection<PropertyImage>? PropertyImages { get; set; }
 
-        public bool CreateProperty(Property property)
+        public virtual ICollection<Amentity>? Amentities { get; set; }
+        public virtual ICollection<PostPrice>? PostPrices { get; set; }
+        public int CreateProperty(Property property)
         {
-            property.Status = 0;
+            property.PropertyImages ??= new HashSet<PropertyImage>();
+
+            if (property.Amentities != null)
+            {
+                property.Amentities = new HashSet<Amentity>(
+                    _context.Amentities
+                        .Where(a => property.Amentities.Select(p => p.AmentityId).Contains(a.AmentityId))
+                        .ToList());
+            }
+
+            if (property.PostPrices != null)
+            {
+                property.PostPrices = new HashSet<PostPrice>(
+                    _context.PostPrices
+                        .Where(p => property.PostPrices.Select(pr => pr.PostPriceId).Contains(p.PostPriceId))
+                        .ToList());
+            }
+
+            if (property.PropertyDeclineReasons != null)
+            {
+                property.PropertyDeclineReasons = new HashSet<PropertyDeclineReason>(
+                    _context.PropertyDeclineReasons
+                        .Where(r => property.PropertyDeclineReasons.Select(pr => pr.ReasonId).Contains(r.ReasonId))
+                        .ToList());
+            }
+
             _context.Properties.Add(property);
-            return SaveChanged();
+            _context.SaveChanges();
+
+            return property.PropertyId;
         }
 
         public bool SaveChanged()
@@ -161,10 +193,62 @@ namespace HolaHousing_BE.Repositories
             return _context.SaveChanges() > 0 ? true : false;
         }
 
-        public bool UpdateProperty(Property property)
+        public int UpdateProperty(Property property)
         {
-            _context.Properties.Update(property);
-            return SaveChanged();
+            var existingProperty = _context.Properties
+               .Include(p => p.Amentities)
+               .Include(p => p.PostPrices)
+               .Include(p => p.PropertyDeclineReasons)
+               .FirstOrDefault(p => p.PropertyId == property.PropertyId);
+
+            if (existingProperty == null)
+            {
+                return 0; 
+            }
+
+            existingProperty.Content = property.Content;
+            existingProperty.Description = property.Description;
+            existingProperty.Price = property.Price;
+            existingProperty.PostTime = property.PostTime;
+            existingProperty.Address = property.Address;
+            existingProperty.City = property.City;
+            existingProperty.District = property.District;
+            existingProperty.Ward = property.Ward;
+            existingProperty.PropertyType = property.PropertyType;
+            existingProperty.Area = property.Area;
+            existingProperty.Lat = property.Lat;
+            existingProperty.Lng = property.Lng;
+            existingProperty.PhoneNum = property.PhoneNum;
+            existingProperty.Owner = property.Owner;
+            existingProperty.Status = property.Status;
+            existingProperty.UpdatedAt = DateTime.Now; 
+
+            if (property.Amentities != null)
+            {
+                existingProperty.Amentities = new HashSet<Amentity>(
+                    _context.Amentities
+                        .Where(a => property.Amentities.Select(p => p.AmentityId).Contains(a.AmentityId))
+                        .ToList());
+            }
+
+            if (property.PostPrices != null)
+            {
+                existingProperty.PostPrices = new HashSet<PostPrice>(
+                    _context.PostPrices
+                        .Where(p => property.PostPrices.Select(pr => pr.PostPriceId).Contains(p.PostPriceId))
+                        .ToList());
+            }
+
+            if (property.PropertyDeclineReasons != null)
+            {
+                existingProperty.PropertyDeclineReasons = new HashSet<PropertyDeclineReason>(
+                    _context.PropertyDeclineReasons
+                        .Where(r => property.PropertyDeclineReasons.Select(pr => pr.ReasonId).Contains(r.ReasonId))
+                        .ToList());
+            }
+            _context.SaveChanges();
+
+            return property.PropertyId;
         }
 
         public bool DeleteProperty(Property property)

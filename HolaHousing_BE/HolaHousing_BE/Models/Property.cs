@@ -34,10 +34,10 @@ namespace HolaHousing_BE.Models
         public int? PosterId { get; set; }
 
         public virtual User? Poster { get; set; }
-        public virtual ICollection<PropertyDeclineReason> PropertyDeclineReasons { get; set; }
-        public virtual ICollection<PropertyImage> PropertyImages { get; set; }
+        public virtual ICollection<PropertyDeclineReason>? PropertyDeclineReasons { get; set; }
+        public virtual ICollection<PropertyImage>? PropertyImages { get; set; }
 
-        public virtual ICollection<Amentity> Amentities { get; set; }
-        public virtual ICollection<PostPrice> PostPrices { get; set; }
+        public virtual ICollection<Amentity>? Amentities { get; set; }
+        public virtual ICollection<PostPrice>? PostPrices { get; set; }
     }
 }
