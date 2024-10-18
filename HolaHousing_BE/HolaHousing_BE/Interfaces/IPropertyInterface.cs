@@ -30,5 +30,6 @@ namespace HolaHousing_BE.Interfaces
             , String? ward, decimal? priceFrom
             , decimal? priceTo);
         bool SaveChanged();
+        bool UpdateImages(int propertyId, List<PropertyImage> imagesProperty);
     }
 }

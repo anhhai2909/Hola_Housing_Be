@@ -14,6 +14,6 @@ namespace HolaHousing_BE.Models
         public int AmentityId { get; set; }
         public string? AmentityName { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Property> Properties { get; set; }
+        public virtual ICollection<Property>? Properties { get; set; }
     }
 }

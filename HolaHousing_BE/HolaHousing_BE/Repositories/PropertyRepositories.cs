@@ -365,5 +365,14 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.PropertyDeclineReasons.FirstOrDefault(p => p.PropertyId == proId && p.ReasonId == reasonId);
         }
+
+        public bool UpdateImages(int propertyId, List<PropertyImage> imagesProperty)
+        {
+            foreach (var item in imagesProperty)
+            {
+                _context.PropertyImages.Add(item);
+            }
+            return SaveChanged();
+        }
     }
 }

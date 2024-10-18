@@ -2,11 +2,13 @@
 using HolaHousing_BE.DTO;
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using HolaHousing_BE.Services.ImageService;
 using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
 using System.Collections.Generic;
 
@@ -20,12 +22,14 @@ namespace HolaHousing_BE.Controllers
         private readonly IPropertyInterface _propertyInterface;
         private readonly IMapper _mapper;
         private readonly NotificationService _notificationService;
+        private readonly ImageService _imageService;
         public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext)
         {
             _notificationInterface = notificationInterface;
             _propertyInterface = propertyInterface;
             _mapper = mapper;
             _notificationService = new NotificationService(hubContext);
+            _imageService = new ImageService();
         }
 
         [HttpGet("GetProsByPosterAndStatus")]
@@ -165,12 +169,56 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
+
+        [HttpPost("Upload/Image/{pid}")]
+        public async Task<IActionResult> UploadImage(int pid, [FromForm] List<IFormFile> images)
+        {
+            var imagesProperty = new List<PropertyImage>();
+            var p = _propertyInterface.GetPropertyByID(pid);
+            if(p == null)
+            {
+                return NotFound("Not found property with id " + pid);
+            }
+            foreach (var item in images)
+            {
+                if (item == null || item.Length == 0)
+                    return BadRequest("No file provided or the file is empty.");
+
+                try
+                {
+                    // Call your image upload method with the file and file name
+                    var imageUrl = await _imageService.UploadImageAsync1(item, item.FileName);
+                    var propertyImage = new PropertyImage
+                    {
+                        PropertyId = p.PropertyId,
+                        Image = imageUrl 
+                    };
+                    imagesProperty.Add(propertyImage);
+                }
+                catch (Exception ex)
+                {
+                    // Handle errors
+                    return StatusCode(500, $"Internal server error: {ex.Message}");
+                }
+            }
+
+            if(_propertyInterface.UpdateImages(p.PropertyId, imagesProperty))
+            {
+                return Ok(new { message = "Images uploaded successfully" });
+            }
+            else
+            {
+                return BadRequest(new { error = "Images upload failed" });
+            }
+            
+        }
+
         [HttpPost("Create")]
         public IActionResult CreateProperty([FromBody] Property propertyCreate)
         {
             if (propertyCreate == null)
                 return BadRequest(ModelState);
-          
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -186,6 +234,7 @@ namespace HolaHousing_BE.Controllers
 
             return Ok(_propertyInterface.CreateProperty(propertyCreate));
         }
+
 
         [HttpPost("CreatePropertyDeclineReason")]
         public IActionResult CreateProperTyDeclineReason([FromQuery] int proId, [FromQuery] int? reasonId, [FromQuery] String? others)

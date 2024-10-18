@@ -10,6 +10,7 @@ namespace HolaHousing_BE.DTO
         public DateTime? PostTime { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string? Address { get; set; }
+        public string? PropertyType { get; set; }
         public string? City { get; set; }
         public string? District { get; set; }
         public string? Ward { get; set; }
