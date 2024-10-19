@@ -8,7 +8,7 @@ namespace HolaHousing_BE.Interfaces
         ICollection<Property> GetProperties();
         ICollection<Property> GetPropertiesByAmentities(List<int> amentities);
         ICollection<Property> GetPropertiesByPoster(int posterId, int pid);
-        List<SmallPropertyDTO> paging(List<SmallPropertyDTO> list,int pageSize,int pageNumber, ref int size);
+        ICollection<SmallPropertyDTO> paging(List<SmallPropertyDTO> list,int pageSize,int pageNumber);
         Property GetPropertyByID(int id);
         public string GetFirstImage(int id);
         public bool IsExisted(int id);
@@ -28,7 +28,7 @@ namespace HolaHousing_BE.Interfaces
             , String? propertyType, String? address
             , String? city, String? district
             , String? ward, decimal? priceFrom
-            , decimal? priceTo, double? lat, double? lng);
+            , decimal? priceTo);
         bool SaveChanged();
         bool UpdateImages(int propertyId, List<PropertyImage> imagesProperty);
     }

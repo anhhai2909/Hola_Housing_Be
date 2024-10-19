@@ -4,8 +4,13 @@ using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
 using HolaHousing_BE.Services.ImageService;
 using HolaHousing_BE.Services.NotificationService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
+using NguyenAnhHai_Assignment1_PRN231.AutoMapper;
+using System.Collections.Generic;
 
 namespace HolaHousing_BE.Controllers
 {
@@ -30,7 +35,7 @@ namespace HolaHousing_BE.Controllers
         [HttpGet("GetProsByPosterAndStatus")]
         public IActionResult GetProsByPosterAndStatus([FromQuery] int posterId, [FromQuery] int statusId)
         {
-            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPosterAndStatus(posterId, statusId));
+            var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPosterAndStatus(posterId,statusId));
             foreach (var item in properties)
             {
                 foreach (var p in item.PostPrices)
@@ -46,9 +51,34 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProperties()
-        {
+        public IActionResult GetProperties() {            
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetProperties());
+            foreach (var item in properties)
+            {
+                foreach (var p in item.PostPrices)
+                {
+                    if (p.PostPriceId == 1)
+                    {
+                        item.ManyImg = true;
+                        break; 
+                    }
+                }
+            }
+            return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
+        }
+        [HttpGet("SearchAndFilter")]
+        public IActionResult SearchAndFilter([FromQuery] int? sortBy, [FromQuery] String? searchString
+            , [FromQuery] String? propertyType, [FromQuery] String? address
+            , [FromQuery] String? city, [FromQuery] String? district
+            , [FromQuery] String? ward, [FromQuery] decimal? priceFrom
+            , [FromQuery] decimal? priceTo, [FromQuery] int pageSize
+            , [FromQuery] int pageNumber)
+        {
+            var properties = _propertyInterface.paging(_mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.SearchProperty(sortBy, searchString
+                , propertyType, address
+                , city, district
+                , ward, priceFrom
+                , priceTo)), pageSize, pageNumber);
             foreach (var item in properties)
             {
                 foreach (var p in item.PostPrices)
@@ -62,42 +92,10 @@ namespace HolaHousing_BE.Controllers
             }
             return ModelState.IsValid ? Ok(properties) : BadRequest(ModelState);
         }
-        [HttpGet("SearchAndFilter")]
-        public IActionResult SearchAndFilter([FromQuery] int? sortBy, [FromQuery] String? searchString
-            , [FromQuery] String? propertyType, [FromQuery] String? address
-            , [FromQuery] String? city, [FromQuery] String? district
-            , [FromQuery] String? ward, [FromQuery] decimal? priceFrom
-            , [FromQuery] decimal? priceTo, [FromQuery] int pageSize
-            , [FromQuery] int pageNumber, [FromQuery] float lat, [FromQuery] float lng)
-        {
-            int size = 0;
-            var properties = _propertyInterface.paging(_mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.SearchProperty(sortBy, searchString
-                , propertyType, address
-                , city, district
-                , ward, priceFrom
-                , priceTo, lat, lng)), pageSize, pageNumber, ref size);
-            foreach (var item in properties)
-            {
-                foreach (var p in item.PostPrices)
-                {
-                    if (p.PostPriceId == 1)
-                    {
-                        item.ManyImg = true;
-                        break;
-                    }
-                }
-            }
-            return ModelState.IsValid ? Ok(new
-            {
-                data = properties,
-                total = size
-            }) : BadRequest(ModelState);
-        }
         [HttpGet("{id}")]
-        public IActionResult GetPropertiyByID(int id)
-        {
+        public IActionResult GetPropertiyByID(int id) {
             var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
-            if (property == null)
+            if(property == null)
             {
                 return NotFound();
             }
@@ -126,7 +124,7 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("SearchByLatAndLng")]
-        public IActionResult SearchByLatAndLng(double lat, double lng, int pid)
+        public IActionResult SearchByLatAndLng(double lat,double lng, int pid)
         {
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesNear(lat, lng, pid, 10000));
             if (properties == null)
@@ -177,7 +175,7 @@ namespace HolaHousing_BE.Controllers
         {
             var imagesProperty = new List<PropertyImage>();
             var p = _propertyInterface.GetPropertyByID(pid);
-            if (p == null)
+            if(p == null)
             {
                 return NotFound("Not found property with id " + pid);
             }
@@ -193,7 +191,7 @@ namespace HolaHousing_BE.Controllers
                     var propertyImage = new PropertyImage
                     {
                         PropertyId = p.PropertyId,
-                        Image = imageUrl
+                        Image = imageUrl 
                     };
                     imagesProperty.Add(propertyImage);
                 }
@@ -204,7 +202,7 @@ namespace HolaHousing_BE.Controllers
                 }
             }
 
-            if (_propertyInterface.UpdateImages(p.PropertyId, imagesProperty))
+            if(_propertyInterface.UpdateImages(p.PropertyId, imagesProperty))
             {
                 return Ok(new { message = "Images uploaded successfully" });
             }
@@ -212,7 +210,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return BadRequest(new { error = "Images upload failed" });
             }
-
+            
         }
 
         [HttpPost("Create")]
@@ -247,7 +245,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return BadRequest("Existed");
             }
-            if (!_propertyInterface.AddPropertyDeclineReason(proId, reasonId, others))
+            if (!_propertyInterface.AddPropertyDeclineReason(proId,reasonId,others))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
@@ -284,7 +282,7 @@ namespace HolaHousing_BE.Controllers
             if (propertyId == null || status == null)
                 return BadRequest(ModelState);
 
-            if (_propertyInterface.GetPropertyByID(propertyId) == null)
+            if(_propertyInterface.GetPropertyByID(propertyId) == null)
             {
                 return NotFound();
             }
@@ -328,8 +326,7 @@ namespace HolaHousing_BE.Controllers
             return NoContent();
         }
         [HttpDelete("{propertyId}")]
-        public IActionResult DeleteProperty(int propertyId)
-        {
+        public IActionResult DeleteProperty(int propertyId) {
             if (!_propertyInterface.IsExisted(propertyId))
             {
                 return NotFound();
@@ -372,8 +369,7 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("GetPropertiesByPoster/{posterId}")]
-        public IActionResult GetPropertiesByPoster(int posterId, [FromQuery] int pid)
-        {
+        public IActionResult GetPropertiesByPoster(int posterId, [FromQuery] int pid) {
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesByPoster(posterId, pid));
             if (properties == null)
             {
