@@ -22,7 +22,7 @@ namespace HolaHousing_BE.Repositories
             , String? propertyType
             , String? address, String? city
             , String? district, String? ward
-            , decimal? priceFrom, decimal? priceTo)
+            , decimal? priceFrom, decimal? priceTo, double? lat, double? lng)
         {
             var query = _context.Properties.AsQueryable();
             if (!string.IsNullOrEmpty(searchString))
@@ -53,6 +53,18 @@ namespace HolaHousing_BE.Repositories
             {
                 query = query.Where(p => p.Price >= priceFrom && p.Price <= priceTo);
             }
+            if (lat.HasValue && lat > 0 && lng.HasValue && lng > 0)
+            {
+                double radiusInKm = 10;
+                const double EarthRadiusKm = 6371;
+                query = query.Where(p =>
+                    EarthRadiusKm *
+                    2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin((p.Lat.Value - lat.Value) * Math.PI / 180 / 2), 2) +
+                    Math.Cos(lat.Value * Math.PI / 180) * Math.Cos(p.Lat.Value * Math.PI / 180) *
+                    Math.Pow(Math.Sin((p.Lng.Value - lng.Value) * Math.PI / 180 / 2), 2)))
+                    <= radiusInKm);
+            }
+
             switch (sortBy)
             {
                 case 1:
@@ -312,8 +324,9 @@ namespace HolaHousing_BE.Repositories
             return pagedProperties;
         }
 
-        public ICollection<SmallPropertyDTO> paging(List<SmallPropertyDTO> list, int pageSize, int pageNumber)
+        public List<SmallPropertyDTO> paging(List<SmallPropertyDTO> list, int pageSize, int pageNumber, ref int size)
         {
+            size = list.Count();
             if (pageSize <= 0)
             {
                 throw new ArgumentException("Page size must be greater than zero.", nameof(pageSize));
