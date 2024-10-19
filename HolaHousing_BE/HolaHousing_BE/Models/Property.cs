@@ -33,7 +33,6 @@ namespace HolaHousing_BE.Models
         public DateTime? UpdatedAt { get; set; }
         public int? PosterId { get; set; }
         public int? PostPriceId { get; set; }
-
         public virtual PostPrice? PostPrice { get; set; }
         public virtual User? Poster { get; set; }
         public virtual ICollection<PropertyDeclineReason>? PropertyDeclineReasons { get; set; }
