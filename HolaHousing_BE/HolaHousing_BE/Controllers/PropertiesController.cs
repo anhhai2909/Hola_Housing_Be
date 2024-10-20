@@ -299,31 +299,37 @@ namespace HolaHousing_BE.Controllers
             return Ok("Successfully created");
         }
 
-        [HttpPut("Update")]
-        public IActionResult UpdateProperty([FromBody] Property propertyUpdate)
+        [HttpPut("Update/{userId}")]
+        public IActionResult UpdateProperty([FromBody] Property propertyUpdate,int userId)
         {
             if (propertyUpdate == null)
                 return BadRequest(ModelState);
-
             var existingProperty = _propertyInterface.GetPropertyByID(propertyUpdate.PropertyId);
+            
             if (existingProperty == null)
                 return NotFound();
-
             if (!ModelState.IsValid)
                 return BadRequest();
-
-            //_mapper.Map(propertyUpdate, existingProperty);
-
-            //if (!_propertyInterface.UpdateProperty(propertyUpdate)) 
-            //{
-            //    ModelState.AddModelError("", "Something went wrong updating property");
-            //    return StatusCode(500, ModelState);
-            //}
-            return Ok(_propertyInterface.UpdateProperty(propertyUpdate));
+            if (_mapper.Map<UserDTO>(_userInterface.GetUser(userId)).RoleId == 1)
+            {     
+                return Ok(_propertyInterface.UpdateProperty(propertyUpdate));
+            }
+            else
+            {
+                if (userId == propertyUpdate.PosterId)
+                {
+                    return Ok(_propertyInterface.UpdateProperty(propertyUpdate));
+                }
+                else
+                {
+                    return BadRequest("Không có khả năng truy cấp");
+                }
+            }
+            
         }
 
-        [HttpPut("UpdateStatus")]
-        public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status)
+        [HttpPut("UpdateStatus/{requesterId}")]
+        public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status,int requesterId)
         {
             if (propertyId == null || status == null)
                 return BadRequest(ModelState);
@@ -332,7 +338,29 @@ namespace HolaHousing_BE.Controllers
             {
                 return NotFound();
             }
-            ;
+            if (_mapper.Map<UserDTO>(_userInterface.GetUser(requesterId)).RoleId == 1)
+            {
+                if (!_propertyInterface.UpdateStatus(propertyId, status))
+                {
+                    ModelState.AddModelError("", "Something went wrong updating status");
+                    return StatusCode(500, ModelState);
+                }
+            }
+            else
+            {
+                if (requesterId == _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(propertyId)).PosterId)
+                {
+                    if (!_propertyInterface.UpdateStatus(propertyId, status))
+                    {
+                        ModelState.AddModelError("", "Something went wrong updating status");
+                        return StatusCode(500, ModelState);
+                    }
+                }
+                else
+                {
+                    return BadRequest("Không có khả năng truy cấp");
+                }
+            }
 
             if (!_propertyInterface.UpdateStatus(propertyId, status))
             {
@@ -371,6 +399,7 @@ namespace HolaHousing_BE.Controllers
             }
             return NoContent();
         }
+
         [HttpDelete("{propertyId}")]
         public IActionResult DeleteProperty(int propertyId)
         {
