@@ -91,6 +91,29 @@ namespace HolaHousing_BE.Repositories
                 .Include(p => p.PostPrices)
                 .Where(p => p.Status == 0).ToList();
         }
+
+        public ICollection<Property> GetPropertiesManage(int? status)
+        {
+            if (status.HasValue)
+            {
+                return _context.Properties
+                                .Include(p => p.Amentities)
+                                .Include(p => p.PropertyImages)
+                                .Include(p => p.PostPrice).ThenInclude(p => p.Type)
+                                .Include(p => p.PostPrices)
+                                .Where(p => p.Status == status.Value).ToList();
+            }
+            else
+            {
+                return _context.Properties
+                                .Include(p => p.Amentities)
+                                .Include(p => p.PropertyImages)
+                                .Include(p => p.PostPrice).ThenInclude(p => p.Type)
+                                .Include(p => p.PostPrices).ToList();
+            }
+
+        }
+
         public IEnumerable<Property> GetPropertiesNear(double latitude, double longitude, int pid, double radiusInMeters)
         {
             double radiusInKm = radiusInMeters / 1000.0;

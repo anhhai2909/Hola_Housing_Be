@@ -6,6 +6,7 @@ namespace HolaHousing_BE.Interfaces
     public interface IPropertyInterface
     {
         ICollection<Property> GetProperties();
+        ICollection<Property> GetPropertiesManage(int? status);
         ICollection<Property> GetPropertiesByAmentities(List<int> amentities);
         ICollection<Property> GetPropertiesByPoster(int posterId, int pid);
         List<SmallPropertyDTO> paging(List<SmallPropertyDTO> list,int pageSize,int pageNumber, ref int size);

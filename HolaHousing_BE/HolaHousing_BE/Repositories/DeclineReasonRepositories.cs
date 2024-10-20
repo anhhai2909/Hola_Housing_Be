@@ -14,5 +14,19 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.DeclineReasons.ToList();
         }
+
+        public int AddPropertyDeclineReason(PropertyDeclineReason reasons)
+        {
+            _context.PropertyDeclineReasons.Add(reasons);
+            if (_context.SaveChanges() > 0)
+            {
+                return reasons.ReasonId.GetValueOrDefault();
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
     }
 }
