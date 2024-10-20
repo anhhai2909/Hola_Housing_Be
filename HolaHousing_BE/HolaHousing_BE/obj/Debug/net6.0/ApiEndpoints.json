@@ -100,6 +100,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.DeclineReasonsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/DeclineReasons",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "request",
+        "Type": "UpdateStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.NewsController",
     "Method": "GetNews",
     "RelativePath": "api/News",
@@ -200,6 +221,43 @@
       {
         "Name": "newUpdate",
         "Type": "HolaHousing_BE.DTO.NewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NotificationsController",
+    "Method": "GetNotification",
+    "RelativePath": "api/Notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "top",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NotificationsController",
+    "Method": "MarkReadedNotification",
+    "RelativePath": "api/Notifications/mark/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -391,22 +449,6 @@
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
-    "Method": "GetPropertiyByID",
-    "RelativePath": "api/Properties/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "DeleteProperty",
     "RelativePath": "api/Properties/{propertyId}",
     "HttpMethod": "DELETE",
@@ -475,6 +517,27 @@
         "Name": "propertyId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetPropertiyByID",
+    "RelativePath": "api/Properties/GetById/{proId}/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "proId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -555,6 +618,11 @@
         "Name": "posterId",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "pid",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -578,6 +646,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "GetPropertiesManage",
+    "RelativePath": "api/Properties/Manage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -642,6 +720,16 @@
         "Name": "pageNumber",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "lat",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "lng",
+        "Type": "System.Double",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -662,6 +750,11 @@
       {
         "Name": "lng",
         "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "pid",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -699,6 +792,27 @@
       {
         "Name": "status",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
+    "Method": "UploadImage",
+    "RelativePath": "api/Properties/Upload/Image/{pid}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pid",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "images",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
       }
     ],

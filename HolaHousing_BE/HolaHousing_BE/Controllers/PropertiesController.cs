@@ -15,16 +15,18 @@ namespace HolaHousing_BE.Controllers
     {
         private readonly INotificationInterface _notificationInterface;
         private readonly IPropertyInterface _propertyInterface;
+        private readonly IUserInterface _userInterface;
         private readonly IMapper _mapper;
         private readonly NotificationService _notificationService;
         private readonly ImageService _imageService;
-        public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext)
+        public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext, IUserInterface userInterface)
         {
             _notificationInterface = notificationInterface;
             _propertyInterface = propertyInterface;
             _mapper = mapper;
             _notificationService = new NotificationService(hubContext);
             _imageService = new ImageService();
+            _userInterface = userInterface;
         }
 
         [HttpGet("GetProsByPosterAndStatus")]
@@ -112,15 +114,37 @@ namespace HolaHousing_BE.Controllers
                 total = size
             }) : BadRequest(ModelState);
         }
-        [HttpGet("{id}")]
-        public IActionResult GetPropertiyByID(int id)
+        [HttpGet("GetById/{proId}/{userId}")]
+        public IActionResult GetPropertiyByID(int proId, int userId)
         {
-            var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(id));
+            var property = _propertyInterface.GetPropertyByID(proId);
             if (property == null)
             {
                 return NotFound();
             }
-            return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
+            if (property.Status == 0 || property.Status == 2)
+            {
+                if (_mapper.Map<UserDTO>(_userInterface.GetUser(userId)).RoleId == 1)
+                {
+                    return Ok(property);
+                }
+                else
+                {
+                    if (userId == property.PosterId)
+                    {
+                        return Ok(property);
+                    }
+                    else
+                    {
+                        return BadRequest(ModelState);
+                    }
+                }
+            }
+            else
+            {
+                return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
+            }
+            
         }
         [HttpGet("GetDeclineReasons")]
         public IActionResult GetDeclineReason(int proId)
