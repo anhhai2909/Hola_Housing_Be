@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj": {}
+    "F:\\Code\\C#\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj": {}
   },
   "projects": {
-    "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj": {
+    "F:\\Code\\C#\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj",
+        "projectUniqueName": "F:\\Code\\C#\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj",
         "projectName": "HolaHousing_BE",
-        "projectPath": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj",
-        "packagesPath": "C:\\Users\\Nguyen Anh Hai\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\EXE201\\HolaHousing\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\obj\\",
+        "projectPath": "F:\\Code\\C#\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\HolaHousing_BE.csproj",
+        "packagesPath": "C:\\Users\\Bomwf\\.nuget\\packages\\",
+        "outputPath": "F:\\Code\\C#\\Hola_Housing_Be\\HolaHousing_BE\\HolaHousing_BE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Nguyen Anh Hai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Bomwf\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -55,6 +59,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.33, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.8.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
