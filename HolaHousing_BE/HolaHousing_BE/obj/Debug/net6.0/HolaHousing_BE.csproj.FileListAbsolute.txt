@@ -208,3 +208,5 @@ D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\obj\D
 D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\obj\Debug\net6.0\ref\HolaHousing_BE.dll
 D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MySqlConnector.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll

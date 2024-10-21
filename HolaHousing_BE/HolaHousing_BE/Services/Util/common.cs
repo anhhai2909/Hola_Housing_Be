@@ -4,16 +4,17 @@
     {
         public string GetJwtToken()
         {
-            // Retrieve the JWT token from the Authorization header
-            var bearerToken = HttpContext.Request.Headers["Authorization"].ToString();
+            //// Retrieve the JWT token from the Authorization header
+            //var bearerToken = HttpContext.Request.Headers["Authorization"].ToString();
 
-            if (bearerToken.StartsWith("Bearer "))
-            {
-                var token = bearerToken.Substring("Bearer ".Length).Trim();
+            //if (bearerToken.StartsWith("Bearer "))
+            //{
+            //    var token = bearerToken.Substring("Bearer ".Length).Trim();
 
-                // Now you have the JWT token, you can process it if needed
-                return Ok(new { Token = token });
-            }
+            //    // Now you have the JWT token, you can process it if needed
+            //    return Ok(new { Token = token });
+            //}
+            return "";
         }
     }
 }
