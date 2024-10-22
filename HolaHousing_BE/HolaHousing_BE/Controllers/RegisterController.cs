@@ -43,7 +43,7 @@ namespace UserRegistrationApi.Controllers
             }
         }
 
-        [HttpPost("verify-otp")]
+        [HttpPost("verify")]
         public async Task<IActionResult> VerifyOTP([FromBody] VerifyOTPRequest request)
         {
             try
@@ -107,7 +107,6 @@ namespace UserRegistrationApi.Controllers
 
     public class VerifyOTPRequest
     {
-        public string PhoneNumber { get; set; }
         public string OTP { get; set; }
         public int UserId { get; set; }
 

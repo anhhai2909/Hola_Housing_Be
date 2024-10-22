@@ -26,7 +26,7 @@ namespace HolaHousing_BE.Controllers
             _context = context;
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _context.Users
