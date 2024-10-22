@@ -10,7 +10,36 @@ namespace HolaHousing_BE.Repositories
         {
             _context = context;
         }
-        public User GetUser(int id)
+
+        public int AddUser(User user)
+        {
+            _context.Users.Add(user);
+            if (_context.SaveChanges() > 0)
+            {
+                return user.UserId;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public bool DeleteUser(int id)
+        {
+            User u = _context.Users.Find(id);
+            if (u != null)
+            {
+                _context.Users.Remove(u);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        public User? GetUser(int id)
         {
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
@@ -24,5 +53,25 @@ namespace HolaHousing_BE.Repositories
         {
             return _context.Users.FirstOrDefault(u => u.UserId == id) != null ? true : false;
         }
+
+        public bool UpdateUser(int id, User user)
+        {
+            User u = _context.Users.Find(id);
+
+            if (u != null)
+            {
+                u.Fullname = user.Fullname;
+                u.PhoneNum = user.PhoneNum;
+                u.Email = user.Email;
+                u.Status = user.Status;
+                u.Password = user.Password;
+                u.RoleId = user.RoleId;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
     }
 }

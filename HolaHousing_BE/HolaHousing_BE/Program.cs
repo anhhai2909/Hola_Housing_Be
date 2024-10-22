@@ -4,6 +4,7 @@ using HolaHousing_BE.Repositories;
 using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
+
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<EXE201Context>();

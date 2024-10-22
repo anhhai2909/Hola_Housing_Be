@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace HolaHousing_BE.Models
 {
@@ -32,11 +29,20 @@ namespace HolaHousing_BE.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
             var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                          .SetBasePath(Directory.GetCurrentDirectory())
+                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+            try
+            {
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(configuration.GetConnectionString("MyCnn"));
+                Console.Error.WriteLine("Error when connect to database: " + e);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -26,6 +26,12 @@ namespace HolaHousing_BE.Controllers
             var item = _mapper.Map<List<NewDTO>>(_newInterface.GetNews());
             return ModelState.IsValid ? Ok(item) : BadRequest(ModelState);
         }
+
+        [HttpGet("test")]
+        public IActionResult Helloworld()
+        {
+            return Ok("Hello world!");
+        }
         [HttpGet("{id}")]
         public IActionResult GetNew(int id)
         {
