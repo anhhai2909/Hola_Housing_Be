@@ -121,6 +121,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HolaHousing_BE.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HolaHousing_BE.Controllers.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.LoginController",
+    "Method": "Protected",
+    "RelativePath": "api/Login/protected",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HolaHousing_BE.Controllers.NewsController",
     "Method": "GetNews",
     "RelativePath": "api/News",
@@ -208,6 +234,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.NewsController",
+    "Method": "Helloworld",
+    "RelativePath": "api/News/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -763,7 +799,7 @@
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "UpdateProperty",
-    "RelativePath": "api/Properties/Update",
+    "RelativePath": "api/Properties/Update/{userId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -772,6 +808,11 @@
         "Name": "propertyUpdate",
         "Type": "HolaHousing_BE.Models.Property",
         "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -779,7 +820,7 @@
   {
     "ContainingType": "HolaHousing_BE.Controllers.PropertiesController",
     "Method": "UpdateStatus",
-    "RelativePath": "api/Properties/UpdateStatus",
+    "RelativePath": "api/Properties/UpdateStatus/{requesterId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -793,6 +834,11 @@
         "Name": "status",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "requesterId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -870,6 +916,171 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserRegistrationApi.Controllers.RegisterController",
+    "Method": "Register",
+    "RelativePath": "api/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "UserRegistrationApi.Controllers.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UserRegistrationApi.Controllers.RegisterController",
+    "Method": "VerifyOTP",
+    "RelativePath": "api/Register/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "UserRegistrationApi.Controllers.VerifyOTPRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.SendEmailController",
+    "Method": "SendAcceptEmail",
+    "RelativePath": "api/SendEmail/SendAccept",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "content",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.SendEmailController",
+    "Method": "SendDeclineEmail",
+    "RelativePath": "api/SendEmail/SendDecline",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "content",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.SendEmailController",
+    "Method": "SendOTPEmail",
+    "RelativePath": "api/SendEmail/SendOTP",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "otp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HolaHousing_BE.Controllers.SendEmailController",
+    "Method": "SendRegularEmail",
+    "RelativePath": "api/SendEmail/SendRegularEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "subject",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "HolaHousing_BE.Controllers.TagsController",

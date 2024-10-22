@@ -210,3 +210,11 @@ D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\D
 D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MySqlConnector.dll
 D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MailKit.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MimeKit.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MySqlConnector.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Formats.Asn1.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

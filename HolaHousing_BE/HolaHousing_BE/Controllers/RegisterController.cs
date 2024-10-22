@@ -55,12 +55,7 @@ namespace UserRegistrationApi.Controllers
                 }
                 else
                 {
-                    if(u.PhoneNum != request.PhoneNumber)
-                    {
-                        return StatusCode(404, new { error = "Lỗi xảy ra: Số điện thoại không khớp"});
-                    }
-                    else
-                    {
+
                         // Xu ly OTP
                         if (true)
                         {
@@ -71,7 +66,7 @@ namespace UserRegistrationApi.Controllers
                             }
                         }
 
-                    }
+                    
                 }
                 return NotFound(new { message = "Xác nhận OTP thất bại." });
             }
