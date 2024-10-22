@@ -1,5 +1,6 @@
 ﻿using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using HolaHousing_BE.Services.EmailServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,11 +13,13 @@ namespace UserRegistrationApi.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IUserInterface _userInterface;
+        private readonly SendEmail sendEmail;
 
         public RegisterController(IConfiguration configuration, IUserInterface userInterface)
         {
             _configuration = configuration;
             _userInterface = userInterface;
+            sendEmail = new SendEmail();
         }
 
         [HttpPost]
@@ -24,6 +27,11 @@ namespace UserRegistrationApi.Controllers
         {
             try
             {
+                User user = _userInterface.GetUserByEmail(request.Email);
+                if(user != null)
+                {
+                    return BadRequest(new { error = "Email đã tồn tại!"});
+                }
                 var otp = GenerateOTP();
                 User u = new User
                 {
@@ -32,8 +40,12 @@ namespace UserRegistrationApi.Controllers
                     Password = HashPassword(request.Password),
                     PhoneNum = request.PhoneNumber,
                     Status = 2,
-                    RoleId = 1
+                    RoleId = 2,
+                    Otp = otp
                 };
+
+                await sendEmail.SendOTPAsync(request.Email, otp, request.Fullname);
+
                 int id = _userInterface.AddUser(u);
                 return Ok(new { message = "OTP đã được gửi đến số điện thoại của bạn", uid = id });
             }
@@ -49,24 +61,22 @@ namespace UserRegistrationApi.Controllers
             try
             {
                 User? u = _userInterface.GetUser(request.UserId);
-                if(u == null)
+                if (u == null)
                 {
-                    return StatusCode(404, new { error = "Không tìm thấy user id" + request.UserId});
+                    return StatusCode(404, new { error = "Không tìm thấy user id" + request.UserId });
                 }
                 else
                 {
-
-                        // Xu ly OTP
-                        if (true)
+                    // Xu ly OTP
+                    if (request.OTP == u.Otp)
+                    {
+                        u.Status = 1;
+                        u.Otp = "";
+                        if (_userInterface.UpdateUser(u.UserId, u))
                         {
-                            u.Status = 1;
-                            if(_userInterface.UpdateUser(u.UserId, u))
-                            {
-                                return Ok(new { message = "Đăng ký thành công" });
-                            }
+                            return Ok(new { message = "Đăng ký thành công" });
                         }
-
-                    
+                    }
                 }
                 return NotFound(new { message = "Xác nhận OTP thất bại." });
             }

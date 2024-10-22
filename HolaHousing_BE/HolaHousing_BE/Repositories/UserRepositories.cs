@@ -44,6 +44,11 @@ namespace HolaHousing_BE.Repositories
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
 
+        public User? GetUserByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
+
         public ICollection<User> GetUsers()
         {
             return _context.Users.ToList();

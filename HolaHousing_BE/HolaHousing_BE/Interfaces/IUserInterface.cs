@@ -6,6 +6,7 @@ namespace HolaHousing_BE.Interfaces
     {
         ICollection<User> GetUsers();
         User? GetUser(int id);
+        User? GetUserByEmail(string email);
         bool IsExisted(int id);
         int AddUser(User user);
         bool UpdateUser(int id, User user);

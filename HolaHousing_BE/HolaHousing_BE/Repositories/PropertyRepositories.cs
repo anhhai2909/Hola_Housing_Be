@@ -24,7 +24,7 @@ namespace HolaHousing_BE.Repositories
             , String? district, String? ward
             , decimal? priceFrom, decimal? priceTo, double? lat, double? lng)
         {
-            var query = _context.Properties.AsQueryable();
+            var query = _context.Properties.Include(c => c.PropertyImages).Where(p => p.Status == 1).AsQueryable();
             if (!string.IsNullOrEmpty(searchString))
             {
                 query = query.Where(p => p.Content.ToLower().Contains(searchString.ToLower()));
@@ -89,7 +89,7 @@ namespace HolaHousing_BE.Repositories
                 .Include(p => p.Amentities)
                 .Include(p => p.PropertyImages)
                 .Include(p => p.PostPrices)
-                .Where(p => p.Status == 0).ToList();
+                .Where(p => p.Status == 1).ToList();
         }
 
         public ICollection<Property> GetPropertiesManage(int? status)
@@ -334,6 +334,16 @@ namespace HolaHousing_BE.Repositories
         public string GetPhone(int userId)
         {
             return _context.Users.FirstOrDefault(u => u.UserId == userId).PhoneNum;
+        }
+
+        public string GetPhoneByProperty(int pId)
+        {
+            var p = _context.Properties.Find(pId);
+            if(p != null)
+            {
+                return p.PhoneNum;
+            }
+            return "";
         }
 
         public ICollection<Property> paging(int pageSize, int pageNumber)

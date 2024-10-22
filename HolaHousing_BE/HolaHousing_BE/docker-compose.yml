@@ -1,14 +1,29 @@
-services:
-  ms-sql-server:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "H0laH0using!1306"
-      MSSQL_PID: "Express"
-    ports:
-      - "3000:1433"
-  backend:
-    build: .
-    ports:
-      - "5000:80"
+version: '3.8'
 
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      - SA_PASSWORD=YourStrong@Passw0rd  
+      - ACCEPT_EULA=Y                 
+    ports:
+      - "1434:1433"                     
+    volumes:
+      - sql_data:/var/opt/mssql          
+
+  holahousing_be:
+    build:
+      context: .
+      dockerfile: Dockerfile            
+    ports:
+      - "8080:80"                         
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MyCnn=Server=sqlserver;Database=EXE201;User Id=sa;Password=YourStrong@Passw0rd; 
+    depends_on:
+      - sqlserver                       
+
+volumes:
+  sql_data:
+    driver: local                    

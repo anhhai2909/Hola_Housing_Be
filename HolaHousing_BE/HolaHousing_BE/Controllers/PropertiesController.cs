@@ -2,6 +2,7 @@
 using HolaHousing_BE.DTO;
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
+using HolaHousing_BE.Services.EmailServices;
 using HolaHousing_BE.Services.ImageService;
 using HolaHousing_BE.Services.NotificationService;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace HolaHousing_BE.Controllers
         private readonly IMapper _mapper;
         private readonly NotificationService _notificationService;
         private readonly ImageService _imageService;
+        private readonly SendEmail sendEmail;
         public PropertiesController(IPropertyInterface propertyInterface, INotificationInterface notificationInterface, IMapper mapper, IHubContext<NotificationHub> hubContext, IUserInterface userInterface)
         {
             _notificationInterface = notificationInterface;
@@ -27,6 +29,7 @@ namespace HolaHousing_BE.Controllers
             _notificationService = new NotificationService(hubContext);
             _imageService = new ImageService();
             _userInterface = userInterface;
+            sendEmail = new SendEmail();
         }
 
         [HttpGet("GetProsByPosterAndStatus")]
@@ -66,8 +69,10 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpGet("Manage")]
-        public IActionResult GetPropertiesManage()
+        public IActionResult GetPropertiesManage([FromBody] int uid)
         {
+            User u = _userInterface.GetUser(uid);
+            if (u == null || u.RoleId != 1) return StatusCode(403);
             var properties = _mapper.Map<List<SmallPropertyDTO>>(_propertyInterface.GetPropertiesManage(2));
             foreach (var item in properties)
             {
@@ -114,17 +119,18 @@ namespace HolaHousing_BE.Controllers
                 total = size
             }) : BadRequest(ModelState);
         }
-        [HttpGet("GetById/{proId}/{userId}")]
-        public IActionResult GetPropertiyByID(int proId, int userId)
+        [HttpGet("{proId}")]
+        public IActionResult GetPropertiyByID(int proId, [FromQuery] int userId)
         {
-            var property = _propertyInterface.GetPropertyByID(proId);
+            var property = _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(proId));
             if (property == null)
             {
                 return NotFound();
             }
             if (property.Status == 0 || property.Status == 2)
             {
-                if (_mapper.Map<UserDTO>(_userInterface.GetUser(userId)).RoleId == 1)
+                var u = _mapper.Map<UserDTO>(_userInterface.GetUser(userId));
+                if (u.RoleId == 1)
                 {
                     return Ok(property);
                 }
@@ -144,7 +150,7 @@ namespace HolaHousing_BE.Controllers
             {
                 return ModelState.IsValid ? Ok(property) : BadRequest(ModelState);
             }
-            
+
         }
         [HttpGet("GetDeclineReasons")]
         public IActionResult GetDeclineReason(int proId)
@@ -268,14 +274,7 @@ namespace HolaHousing_BE.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            //var propertyMap = _mapper.Map<Property>(propertyCreate);
-            //propertyMap.PropertyId = 0;
             propertyCreate.PropertyId = 0;
-            //if (!_propertyInterface.CreateProperty(propertyCreate))
-            //{
-            //    ModelState.AddModelError("", "Something went wrong while savin");
-            //    return StatusCode(500, ModelState);
-            //}
 
             return Ok(_propertyInterface.CreateProperty(propertyCreate));
         }
@@ -300,18 +299,18 @@ namespace HolaHousing_BE.Controllers
         }
 
         [HttpPut("Update/{userId}")]
-        public IActionResult UpdateProperty([FromBody] Property propertyUpdate,int userId)
+        public IActionResult UpdateProperty([FromBody] Property propertyUpdate, int userId)
         {
             if (propertyUpdate == null)
                 return BadRequest(ModelState);
             var existingProperty = _propertyInterface.GetPropertyByID(propertyUpdate.PropertyId);
-            
+
             if (existingProperty == null)
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest();
             if (_mapper.Map<UserDTO>(_userInterface.GetUser(userId)).RoleId == 1)
-            {     
+            {
                 return Ok(_propertyInterface.UpdateProperty(propertyUpdate));
             }
             else
@@ -325,20 +324,31 @@ namespace HolaHousing_BE.Controllers
                     return BadRequest("Không có khả năng truy cấp");
                 }
             }
-            
+
         }
 
-        [HttpPut("UpdateStatus/{requesterId}")]
-        public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status,int requesterId)
+        [HttpPut("UpdateStatus")]
+        public IActionResult UpdateStatus([FromQuery] int propertyId, [FromQuery] int status, [FromBody] int uid)
         {
+            User us = _userInterface.GetUser(uid);
+            if (us == null || us.RoleId != 1) return StatusCode(403);
+
             if (propertyId == null || status == null)
                 return BadRequest(ModelState);
+
+            Property p = _propertyInterface.GetPropertyByID(propertyId);
+            if (p == null)
+            {
+                return NotFound("Not found property");
+            }
+
+            User u = _userInterface.GetUser(p.PosterId.Value);
 
             if (_propertyInterface.GetPropertyByID(propertyId) == null)
             {
                 return NotFound();
             }
-            if (_mapper.Map<UserDTO>(_userInterface.GetUser(requesterId)).RoleId == 1)
+            if (_mapper.Map<UserDTO>(_userInterface.GetUser(uid)).RoleId == 1)
             {
                 if (!_propertyInterface.UpdateStatus(propertyId, status))
                 {
@@ -348,7 +358,7 @@ namespace HolaHousing_BE.Controllers
             }
             else
             {
-                if (requesterId == _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(propertyId)).PosterId)
+                if (uid == _mapper.Map<PropertyDTO>(_propertyInterface.GetPropertyByID(propertyId)).PosterId)
                 {
                     if (!_propertyInterface.UpdateStatus(propertyId, status))
                     {
@@ -368,7 +378,6 @@ namespace HolaHousing_BE.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            int userId = 1;
             if (status == 0)
             {
                 Notification n = new Notification
@@ -376,12 +385,13 @@ namespace HolaHousing_BE.Controllers
                     Title = "Từ chối tin đăng",
                     Description = "Tin đăng của bạn đã bị từ chối, xem thông báo để biết chi tiết",
                     CreatedDate = DateTime.Now,
-                    Url = "/list/",
+                    Url = "/detail/" + propertyId,
                     IsRead = false,
-                    UserId = userId
+                    UserId = u.UserId
                 };
+                sendEmail.SendDeclineAsync(u.Email, u.Fullname, "Tin đăng của bạn đã bị từ chối, truy cập website Hola Housing để biết chi tiết");
                 _notificationInterface.AddNotification(n);
-                _notificationService.SendNotification(n, userId);
+                _notificationService.SendNotification(n, u.UserId);
             }
             else if (status == 1)
             {
@@ -392,10 +402,11 @@ namespace HolaHousing_BE.Controllers
                     CreatedDate = DateTime.Now,
                     Url = "/detail/" + propertyId,
                     IsRead = false,
-                    UserId = userId
+                    UserId = u.UserId
                 };
+                sendEmail.SendAcceptAsync(u.Email, u.Fullname, $"Tin đăng của bạn về nhà trọ \"{p.Content}\" đã được duyệt thành công, truy cập website Hola Housing để biết chi tiết");
                 _notificationInterface.AddNotification(n);
-                _notificationService.SendNotification(n, userId);
+                _notificationService.SendNotification(n, u.UserId);
             }
             return NoContent();
         }

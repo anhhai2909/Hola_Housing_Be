@@ -2,6 +2,7 @@
 using HolaHousing_BE.Interfaces;
 using HolaHousing_BE.Models;
 using HolaHousing_BE.Services.NotificationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -9,14 +10,17 @@ using static HolaHousing_BE.Controllers.PropertiesController;
 
 namespace HolaHousing_BE.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class DeclineReasonsController : ControllerBase
     {
         private readonly IDeclineReasonInterface _declineReasonInterface;
-        public DeclineReasonsController(IDeclineReasonInterface declineReasonInterface)
+        private readonly IUserInterface _userInterface;
+        public DeclineReasonsController(IDeclineReasonInterface declineReasonInterface, IUserInterface userInterface)
         {
             _declineReasonInterface = declineReasonInterface;
+            _userInterface = userInterface;
         }
         [HttpGet]
         public IActionResult GetDeclineReasons()

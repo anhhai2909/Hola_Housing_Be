@@ -218,3 +218,9 @@ D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\D
 D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Formats.Asn1.dll
 D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
 D:\HocTap\EXE201\HolaHousing\Hola_Housing_Be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MailKit.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\MimeKit.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Formats.Asn1.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\cms\EXE101_AnhPTM\Projects\holahousing_be\HolaHousing_BE\HolaHousing_BE\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

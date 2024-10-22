@@ -29,19 +29,29 @@ namespace HolaHousing_BE.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             var builder = new ConfigurationBuilder()
-                          .SetBasePath(Directory.GetCurrentDirectory())
-                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                  .SetBasePath(Directory.GetCurrentDirectory())
+                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                  .AddEnvironmentVariables(); 
+
             IConfigurationRoot configuration = builder.Build();
+
             try
             {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+                var connectionString = configuration.GetConnectionString("MyCnn"); 
+                if (string.IsNullOrEmpty(connectionString))
+                {
+                    Console.Error.WriteLine("Connection string is not found!");
+                }
+                else
+                {
+                    optionsBuilder.UseSqlServer(connectionString);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(configuration.GetConnectionString("MyCnn"));
-                Console.Error.WriteLine("Error when connect to database: " + e);
+                Console.Error.WriteLine("Error when connecting to database: " + e);
             }
         }
 

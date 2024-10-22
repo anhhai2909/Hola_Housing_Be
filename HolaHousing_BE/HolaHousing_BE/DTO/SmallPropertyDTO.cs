@@ -18,6 +18,7 @@ namespace HolaHousing_BE.DTO
         public string? Owner { get; set; }
         public int? Status { get; set; }
         public bool? ManyImg { get; set; } = false;
+        public int? PosterId { get; set; }
         public virtual PostPrice? PostPrice { get; set; }
         public virtual ICollection<PropertyImageDTO>? PropertyImages { get; set; } = new List<PropertyImageDTO>();
         public virtual ICollection<PostPriceDTO>? PostPrices { get; set; }

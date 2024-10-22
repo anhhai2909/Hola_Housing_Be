@@ -1,15 +1,12 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
+﻿using HolaHousing_BE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using HolaHousing_BE.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace HolaHousing_BE.Controllers
 {
@@ -29,7 +26,7 @@ namespace HolaHousing_BE.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _context.Users
+            var user = await _context.Users.Include(c => c.Role)
                 .FirstOrDefaultAsync(u => u.Email == model.Email);
 
             if (user == null || !VerifyPassword(model.Password, user.Password))
@@ -46,7 +43,7 @@ namespace HolaHousing_BE.Controllers
                 Expires = DateTime.UtcNow.AddMinutes(15)
             });
 
-            return Ok(new { message = "Login successful" });
+            return Ok(new { uid = user.UserId, accessToken = token, username = user.Fullname });
         }
 
         private bool VerifyPassword(string inputPassword, string storedPassword)
@@ -65,7 +62,7 @@ namespace HolaHousing_BE.Controllers
 
         private string GenerateJwtToken(User user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SigningKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -75,13 +72,14 @@ namespace HolaHousing_BE.Controllers
                 new Claim("phoneNumber", user.PhoneNum),
                 new Claim("fullName", user.Fullname),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("role", user.Role.RoleName),
             };
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(15),
+                expires: DateTime.UtcNow.AddSeconds(int.Parse(_configuration["Jwt:ExpirationSeconds"])),
                 signingCredentials: credentials
             );
 
