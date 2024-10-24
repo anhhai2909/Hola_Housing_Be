@@ -32,6 +32,8 @@ namespace HolaHousing_BE.Controllers
             if (user == null || !VerifyPassword(model.Password, user.Password))
                 return Unauthorized("Invalid email or password");
 
+            if(user.Status == 2) return StatusCode(406, user.Email+"//"+user.UserId);
+
             var token = GenerateJwtToken(user);
 
             // Set the token as a cookie

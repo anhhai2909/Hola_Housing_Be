@@ -131,6 +131,7 @@ namespace HolaHousing_BE.Repositories
                 .Include(p => p.Amentities)
                 .Include(p => p.PropertyImages)
                 .Include(p => p.PostPrices)
+                .Where(p => p.Status == 1)
                 .ToList();
         }
         public Property GetPropertyByID(int id)
@@ -166,7 +167,8 @@ namespace HolaHousing_BE.Repositories
             var properties = _context.Properties
                 .Include(p => p.PropertyImages)
                 .Include(p => p.Amentities)
-                .Include(p => p.PostPrices).ToList();
+                .Include(p => p.PostPrices)
+                .Where(p => p.Status == 1).ToList();
             if (amentities.Count > 0)
             {
                 var matchingProperties = new List<Property>();
@@ -217,9 +219,12 @@ namespace HolaHousing_BE.Repositories
                         .Where(r => property.PropertyDeclineReasons.Select(pr => pr.ReasonId).Contains(r.ReasonId))
                         .ToList());
             }
-            DateTime dateTime = DateTime.Now;
-            property.CreatedAt = dateTime;
-            property.UpdatedAt = dateTime;
+            DateTime utcDateTime = DateTime.UtcNow;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            DateTime localDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, timeZone);
+
+            property.CreatedAt = localDateTime;
+            property.UpdatedAt = localDateTime;
             _context.Properties.Add(property);
             _context.SaveChanges();
 
@@ -259,7 +264,10 @@ namespace HolaHousing_BE.Repositories
             existingProperty.PhoneNum = property.PhoneNum;
             existingProperty.Owner = property.Owner;
             existingProperty.Status = property.Status;
-            existingProperty.UpdatedAt = DateTime.Now;
+            DateTime utcDateTime = DateTime.UtcNow;
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            DateTime localDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, timeZone);
+            existingProperty.UpdatedAt = localDateTime;
 
             if (property.Amentities != null)
             {
@@ -328,6 +336,7 @@ namespace HolaHousing_BE.Repositories
                 .Include(p => p.PostPrices)
                 .Where(p => p.PosterId == posterId)
                 .Where(p => p.PropertyId != pid)
+                .Where(p => p.Status == 1)
                 .ToList();
         }
 
@@ -339,7 +348,7 @@ namespace HolaHousing_BE.Repositories
         public string GetPhoneByProperty(int pId)
         {
             var p = _context.Properties.Find(pId);
-            if(p != null)
+            if (p != null)
             {
                 return p.PhoneNum;
             }

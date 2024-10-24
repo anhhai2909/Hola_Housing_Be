@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace HolaHousing_BE.Controllers
 {
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user, admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -19,12 +19,12 @@ namespace HolaHousing_BE.Controllers
         private readonly IPropertyInterface _propertyInterface;
         private readonly ImageService _imageService;
         private readonly IMapper _mapper;
-        public UsersController(IUserInterface userInterface, IMapper mapper, IPropertyInterface propertyInterface, ImageService imageService)
+        public UsersController(IUserInterface userInterface, IMapper mapper, IPropertyInterface propertyInterface)
         {
             _mapper = mapper;
             _userInterface = userInterface;
             _propertyInterface = propertyInterface;
-            _imageService = imageService;
+            _imageService = new ImageService();
         }
         [HttpGet]
         public IActionResult GetUsers() { 
