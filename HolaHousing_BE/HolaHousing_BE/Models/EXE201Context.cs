@@ -209,7 +209,7 @@ namespace HolaHousing_BE.Models
                     .HasColumnType("datetime")
                     .HasColumnName("Created_At");
 
-                entity.Property(e => e.Description).HasColumnType("text");
+                entity.Property(e => e.Description).HasColumnType("nvarchar(max)");
 
                 entity.Property(e => e.District).HasMaxLength(50);
 

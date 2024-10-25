@@ -40,9 +40,8 @@ namespace HolaHousing_BE.Controllers
             Response.Cookies.Append("jwt_token", token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true, // Use only in HTTPS
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.UtcNow.AddMinutes(15)
+                Expires = DateTime.UtcNow.AddSeconds(int.Parse(_configuration["Jwt:ExpirationSeconds"]))
             });
 
             return Ok(new { uid = user.UserId, accessToken = token, username = user.Fullname });
